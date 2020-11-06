@@ -1,0 +1,296 @@
+%% packages
+\usepackage{amsmath, amssymb, amsthm, bm, dsfont, mathtools, mathrsfs}
+\usepackage{algorithm, algorithmicx, algpseudocode}
+\usepackage{graphicx, subfigure}
+\usepackage{color}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{hhline, makecell}
+\usepackage{xparse, xspace}
+
+%% environments
+\newtheorem{asp}{Assumption}
+\newtheorem*{asp*}{Assumption}
+\newtheorem{prop}{Proposition}
+\newtheorem*{prop*}{Proposition}
+\newtheorem{lem}{Lemma}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{thm}{Theorem}
+\newtheorem*{thm*}{Theorem}
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem*{cor*}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definition}
+\newtheorem*{defi*}{Definition}
+\theoremstyle{remark}
+\newtheorem{rmk}{Remark}
+\newtheorem*{rmk*}{Remark}
+
+\newcommand\todo[1]{\textcolor{red}{[TODO: #1]}}
+
+
+%% common math
+% notations
+\newcommand{\MDP}{\mathrm{MDP}}
+\newcommand{\regret}{\mathrm{regret}}
+\newcommand{\sgd}{\mathrm{sgd}}
+
+\newcommand{\for}{\mathrm{for}}
+\newcommand{\where}{\mathrm{where}}
+
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\inv}{{-1}}
+
+% operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\lap}{\Delta}
+\DeclareMathOperator{\grad}{\nabla}
+\DeclareMathOperator{\hess}{\nabla^2}
+\newcommand{\dif}{\mathrm{d}}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\diag}{Diag}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\st}{s.t.\,}
+
+% brackets
+\newcommand{\bracket}[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\abracket}[1]{\ensuremath{\langle#1\rangle}}
+\newcommand{\sbracket}[1]{\ensuremath{\left[#1\right]}}
+\newcommand{\cbracket}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+\newcommand{\norm}[1]{\ensuremath{\left\|#1\right\|}}
+\newcommand{\set}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\eval}[1]{\ensuremath{\left.#1\right|}}
+\newcommand{\given}{\,\middle|\,}
+
+% big O
+\newcommand{\smallO}[1]{\ensuremath{\operatorname{o}\left(#1\right)}}
+\newcommand{\bigO}[1]{\ensuremath{\operatorname{\mathcal{O}}\left(#1\right)}}
+\newcommand{\bigOT}[1]{\ensuremath{\operatorname{\widetilde{\mathcal{O}}}\left(#1\right)}}
+\newcommand{\bigTht}[1]{\ensuremath{\operatorname{\Theta}\left(#1\right)}}
+\newcommand{\bigOmg}[1]{\ensuremath{\operatorname{\Omega}\left(#1\right)}}
+\newcommand{\bigOmgT}[1]{\ensuremath{\operatorname{\widetilde{\Omega}}\left(#1\right)}}
+
+
+% kl divergence: \kld{p}{q}
+\DeclarePairedDelimiterX{\infdivx}[2]{(}{)}{%
+  #1\;\delimsize|\delimsize|\;#2%
+}
+\newcommand{\kld}[2]{D_{\mathrm{KL}}  \infdivx{#1}{#2}}
+
+% indicator: \ind{x=1}
+\newcommand{\ind}[1]{\ensuremath{\operatorname{\mathds{1}}\left[#1\right]}}
+
+% probability: \prob{X}, \prob{X \vert Y}
+\newcommand{\prob}[1]{\ensuremath{\operatorname{\mathds{P}}\left(#1\right)}}
+
+% expectation: \expect{X}, \expect[x]{X}
+\NewDocumentCommand \expect { o m } {%
+  \ensuremath{\mathds{E}%
+  \IfValueTF {#1} {%
+    _{#1} \left[ #2 \right]%
+  }{%
+    \left[ #2 \right]%
+  }%
+  }\xspace%
+}
+
+% variance: \var{X}, \var[x]{X}
+\NewDocumentCommand \var { o m } {%
+  \ensuremath{\mathrm{Var}%
+  \IfValueTF {#1} {%
+    _{#1} \left[ #2 \right]%
+  }{%
+    \left[ #2 \right]%
+  }%
+  }\xspace%
+}
+
+
+%% styled letters
+% boldface font
+\newcommand{\zeroB}{\bm{0}}
+\newcommand{\oneB}{\bm{1}}
+
+\newcommand{\aB}{\bm{a}}
+\newcommand{\bB}{\bm{b}}
+\newcommand{\cB}{\bm{c}}
+\newcommand{\dB}{\bm{d}}
+\newcommand{\eB}{\bm{e}}
+\newcommand{\fB}{\bm{f}}
+\newcommand{\gB}{\bm{g}}
+\newcommand{\hB}{\bm{h}}
+\newcommand{\iB}{\bm{i}}
+\newcommand{\jB}{\bm{j}}
+\newcommand{\kB}{\bm{k}}
+\newcommand{\lB}{\bm{l}}
+\newcommand{\mB}{\bm{m}}
+\newcommand{\nB}{\bm{n}}
+\newcommand{\oB}{\bm{o}}
+\newcommand{\pB}{\bm{p}}
+\newcommand{\qB}{\bm{q}}
+\newcommand{\rB}{\bm{r}}
+\newcommand{\sB}{\bm{s}}
+\newcommand{\tB}{\bm{t}}
+\newcommand{\uB}{\bm{u}}
+\newcommand{\vB}{\bm{v}}
+\newcommand{\wB}{\bm{w}}
+\newcommand{\xB}{\bm{x}}
+\newcommand{\yB}{\bm{y}}
+\newcommand{\zB}{\bm{z}}
+
+\newcommand{\AB}{\bm{A}}
+\newcommand{\BB}{\bm{B}}
+\newcommand{\CB}{\bm{C}}
+\newcommand{\DB}{\bm{D}}
+\newcommand{\EB}{\bm{E}}
+\newcommand{\FB}{\bm{F}}
+\newcommand{\GB}{\bm{G}}
+\newcommand{\HB}{\bm{H}}
+\newcommand{\IB}{\bm{I}}
+\newcommand{\JB}{\bm{J}}
+\newcommand{\KB}{\bm{K}}
+\newcommand{\LB}{\bm{L}}
+\newcommand{\MB}{\bm{M}}
+\newcommand{\NB}{\bm{N}}
+\newcommand{\OB}{\bm{O}}
+\newcommand{\PB}{\bm{P}}
+\newcommand{\QB}{\bm{Q}}
+\newcommand{\RB}{\bm{R}}
+\newcommand{\SB}{\bm{S}}
+\newcommand{\TB}{\bm{T}}
+\newcommand{\UB}{\bm{U}}
+\newcommand{\VB}{\bm{V}}
+\newcommand{\WB}{\bm{W}}
+\newcommand{\XB}{\bm{X}}
+\newcommand{\YB}{\bm{Y}}
+\newcommand{\ZB}{\bm{Z}}
+
+\newcommand{\alphaB}{\bm{\alpha}}
+\newcommand{\betaB}{\bm{\beta}}
+\newcommand{\gammaB}{\bm{\gamma}}
+\newcommand{\deltaB}{\bm{\delta}}
+\newcommand{\epsilonB}{\bm{\epsilon}}
+\newcommand{\varepsilonB}{\bm{\varepsilon}}
+\newcommand{\zetaB}{\bm{\zeta}}
+\newcommand{\etaB}{\bm{\eta}}
+\newcommand{\thetaB}{\bm{\theta}}
+\newcommand{\varthetaB}{\bm{\vartheta}}
+\newcommand{\iotaB}{\bm{\iota}}
+\newcommand{\kappaB}{\bm{\kappa}}
+\newcommand{\lambdaB}{\bm{\lambda}}
+\newcommand{\muB}{\bm{\mu}}
+\newcommand{\nuB}{\bm{\nu}}
+\newcommand{\xiB}{\bm{\xi}}
+\newcommand{\piB}{\bm{\pi}}
+\newcommand{\varpiB}{\bm{\varpi}}
+\newcommand{\rhoB}{\bm{\rho}}
+\newcommand{\varrhoB}{\bm{\varrho}}
+\newcommand{\sigmaB}{\bm{\sigma}}
+\newcommand{\varsigmaB}{\bm{\varsigma}}
+\newcommand{\tauB}{\bm{\tau}}
+\newcommand{\upsilonB}{\bm{\upsilon}}
+\newcommand{\phiB}{\bm{\phi}}
+\newcommand{\varphiB}{\bm{\varphi}}
+\newcommand{\chiB}{\bm{\chi}}
+\newcommand{\psiB}{\bm{\psi}}
+\newcommand{\omegaB}{\bm{\omega}}
+
+\newcommand{\GammaB}{\bm{\Gamma}}
+\newcommand{\DeltaB}{\bm{\Delta}}
+\newcommand{\ThetaB}{\bm{\Theta}}
+\newcommand{\LambdaB}{\bm{\Lambda}}
+\newcommand{\XiB}{\bm{\Xi}}
+\newcommand{\PiB}{\bm{\Pi}}
+\newcommand{\SigmaB}{\bm{\Sigma}}
+\newcommand{\UpsilonB}{\bm{\Upsilon}}
+\newcommand{\PhiB}{\bm{\Phi}}
+\newcommand{\PsiB}{\bm{\Psi}}
+\newcommand{\OmegaB}{\bm{\Omega}}
+
+% blackboard bold font
+\newcommand{\onebb}{\mathds{1}}
+
+\newcommand{\Abb}{\mathds{A}}
+% \newcommand{\Bbb}{\mathds{B}}
+\newcommand{\Cbb}{\mathds{C}}
+\newcommand{\Dbb}{\mathds{D}}
+\newcommand{\Ebb}{\mathds{E}}
+\newcommand{\Fbb}{\mathds{F}}
+\newcommand{\Gbb}{\mathds{G}}
+\newcommand{\Hbb}{\mathds{H}}
+\newcommand{\Ibb}{\mathds{I}}
+\newcommand{\Jbb}{\mathds{J}}
+\newcommand{\Kbb}{\mathds{K}}
+\newcommand{\Lbb}{\mathds{L}}
+\newcommand{\Mbb}{\mathds{M}}
+\newcommand{\Nbb}{\mathds{N}}
+\newcommand{\Obb}{\mathds{O}}
+\newcommand{\Pbb}{\mathds{P}}
+\newcommand{\Qbb}{\mathds{Q}}
+\newcommand{\Rbb}{\mathds{R}}
+\newcommand{\Sbb}{\mathds{S}}
+\newcommand{\Tbb}{\mathds{T}}
+\newcommand{\Ubb}{\mathds{U}}
+\newcommand{\Vbb}{\mathds{V}}
+\newcommand{\Wbb}{\mathds{W}}
+\newcommand{\Xbb}{\mathds{X}}
+\newcommand{\Ybb}{\mathds{Y}}
+\newcommand{\Zbb}{\mathds{Z}}
+
+% calligraphic font
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\Ccal}{\mathcal{C}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Gcal}{\mathcal{G}}
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Ical}{\mathcal{I}}
+\newcommand{\Jcal}{\mathcal{J}}
+\newcommand{\Kcal}{\mathcal{K}}
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Ncal}{\mathcal{N}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\Pcal}{\mathcal{P}}
+\newcommand{\Qcal}{\mathcal{Q}}
+\newcommand{\Rcal}{\mathcal{R}}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Vcal}{\mathcal{V}}
+\newcommand{\Wcal}{\mathcal{W}}
+\newcommand{\Xcal}{\mathcal{X}}
+\newcommand{\Ycal}{\mathcal{Y}}
+\newcommand{\Zcal}{\mathcal{Z}}
+
+\newcommand{\Ascr}{\mathscr{A}}
+\newcommand{\Bscr}{\mathscr{B}}
+\newcommand{\Cscr}{\mathscr{C}}
+\newcommand{\Dscr}{\mathscr{D}}
+\newcommand{\Escr}{\mathscr{E}}
+\newcommand{\Fscr}{\mathscr{F}}
+\newcommand{\Gscr}{\mathscr{G}}
+\newcommand{\Hscr}{\mathscr{H}}
+\newcommand{\Iscr}{\mathscr{I}}
+\newcommand{\Jscr}{\mathscr{J}}
+\newcommand{\Kscr}{\mathscr{K}}
+\newcommand{\Lscr}{\mathscr{L}}
+\newcommand{\Mscr}{\mathscr{M}}
+\newcommand{\Nscr}{\mathscr{N}}
+\newcommand{\Oscr}{\mathscr{O}}
+\newcommand{\Pscr}{\mathscr{P}}
+\newcommand{\Qscr}{\mathscr{Q}}
+\newcommand{\Rscr}{\mathscr{R}}
+\newcommand{\Sscr}{\mathscr{S}}
+\newcommand{\Tscr}{\mathscr{T}}
+\newcommand{\Uscr}{\mathscr{U}}
+\newcommand{\Vscr}{\mathscr{V}}
+\newcommand{\Wscr}{\mathscr{W}}
+\newcommand{\Xscr}{\mathscr{X}}
+\newcommand{\Yscr}{\mathscr{Y}}
+\newcommand{\Zscr}{\mathscr{Z}}

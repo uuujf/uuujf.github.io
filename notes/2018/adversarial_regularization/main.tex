@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{mymath}
+
+\title{Adversarial Regularization}
+\author{Jingfeng Wu}
+\date{Created: May 2018\\ Last updated: \today}
+
+\begin{document}
+\maketitle
+
+\section{Adversarial Training}
+Thanks to FGSM~\cite{goodfellow2014explaining}, adversarial training could be employed efficiently.
+
+\subsection{Fast Gradient Sign Method}
+Given loss function $J(\theta, x, y)$, its linearization is
+\begin{equation*}
+    J(\theta, x+\eta, y) \approx J(\theta, x, y) + \grad_{\theta} J(\theta, x, y)^T \eta.
+\end{equation*}
+
+The adversarial perturbation could be recognized as the solution of the following linear optimization problem,
+\begin{equation*}
+\begin{aligned}
+    \max_{\eta} &\quad J(\theta, x+\eta, y) = J(\theta, x, y) + \grad_{\theta} J(\theta, x, y)^T \eta \\
+    \st &\quad \norm{\eta}_{\infty} \le \epsilon.
+\end{aligned}
+\end{equation*}
+Obviously, the optimal value is
+\begin{equation*}
+    \eta^* = \epsilon \text{sign} \grad_{\theta} J(\theta, x, y).
+\end{equation*}
+
+The so called \emph{fast gradient sign method} (FGSM) is to assume that $x+\eta^*$ is the adversarial
+example of $x$.
+Though FGSM might not find the least perturbed adversarial example as deep fool\cite{moosavi2016deepfool},
+the main advantage of which is the adversarial example could be identified by merely once back propagation, which makes adversarial training practical.
+
+Note that the approximate solution with respect to $L_2$ constraint could be obtained similarly as
+\begin{equation*}
+    \eta^* \approx \epsilon \frac{\grad J(\theta, x, y)}{\norm{\grad J}_2}.
+\end{equation*}
+
+Ignoring the computational burden, one can use proximal gradient descent (PGD) to find more reliable adversarial examples~\cite{madry2017towards}.
+
+\subsection{Adversarial Regularization}
+The FGSM adversarial training regularization works as,
+\begin{equation*}
+    \tilde{J}(\theta, x, y) = \alpha J(\theta, x, y) + (1-\alpha)J(\theta, x+\epsilon\text{sign}\grad_{\theta} J(\theta, x), y).
+\end{equation*}
+To take a closer look, apply Taylor's expansion,
+\begin{equation*}
+\begin{aligned}
+\tilde{J}(\theta, x, y) &\approx \alpha J(\theta, x, y) + (1-\alpha) \left( J(\theta, x, y) + \grad_{\theta} J(\theta, x, y)^T \epsilon\text{sign}\grad_{\theta} J(\theta, x, y) \right) \\
+&= J(\theta, x, y) + (1-\alpha)\epsilon \norm{\grad_{\theta} J(\theta, x, y)}_1^2.
+\end{aligned}
+\end{equation*}
+
+Thus adversarial training with FGSM, in sense of \textbf{small} perturbation, is actually penalizing the $L_1$ norm of gradient of loss with respect to input, which brings smoothness to the classifier. 
+
+\section{Virtual Adversarial Training}
+The spirit of VAT~\cite{miyato2017virtual} is to find the direction where the output of the classifier changes most.
+Concisely, let $q$ be the true distribution and $p$ be the model, then the original real adversarial training regularization is,
+\begin{equation*}
+\begin{aligned}
+    \max_{r}\quad & D\left[q(y|x), p(y|x+r_{\text{qadv}}, \theta)\right]\\
+    \st\quad & \norm{r}_2 \le \epsilon,
+\end{aligned}
+\end{equation*}
+while the virtual adversarial training regularization is,
+\begin{equation*}
+\begin{aligned}
+    \max_{r}\quad & D\left[p(y|x), p(y|x+r, \theta)\right]\\
+    \st\quad & \norm{r}_2 \le \epsilon.
+\end{aligned}
+\end{equation*}
+Here in some cases we omit $\theta$ of $p(y|x)$, to emphasize that the expression is independent with $\theta$, i.e., gradients cannot not back propagate through this part.
+
+Define the following notations,
+\begin{equation*}
+\begin{aligned}
+    D(r,x,\theta) &:=D\left[p(y|x), p(y|x+r, \theta)\right] \\
+    r_{vadv} &:= \argmax_{\norm{r}_2\le\epsilon} D(r,x,\theta) \\
+    R_{\text{vadv}} &:= \max_{\norm{r}_2\le\epsilon} D(r,x,\theta) = D(r_{vadv}, x, \theta).
+\end{aligned}
+\end{equation*}
+
+Then the whole VAT loss is,
+\begin{equation*}
+    \Ebb_{\text{labeled data}} \ell(x,y,\theta) + \alpha\Ebb_{\text{labeled or unlabled data}}R_{\text{vadv}}.
+\end{equation*}
+
+To identify the close form solution of $r_{\text{vadv}}$, consider the second-order Taylor approximation
+of $D(r,x,\theta)$ at $r=0$,
+\begin{equation*}
+    D(r,x,\theta) \approx \half r^T H(x,\theta) r.
+\end{equation*}
+Note that $D(0, x, \theta) = 0, \grad_r D(0, x, \theta)=0$, because $D$ is a distance measure and its minimum is achieved when $r=0$.
+Therefore
+\begin{equation*}
+    r_{\text{vadv}} = \argmax_{\norm{r}_2\le \epsilon}D(r,x,\theta) \approx \epsilon u(x,\theta),
+\end{equation*}
+where $u(x,\theta)$ is the unit eigenvector of $H(x, \theta)$ of the maximum eigenvalue.
+This eigenvalue problem could be effectively evaluated by power method.
+
+\subsection{Virtual Adversarial Regularization}
+For adversarial perturbation
+\begin{equation*}
+    r_{\text{vadv}} = \argmax_{\norm{r}_2\le \epsilon}D(r,x,\theta) \approx \epsilon u(x,\theta),
+\end{equation*}
+the virtual adversarial regularization is,
+\begin{equation*}
+    R_{\text{vadv}} = \max_{\norm{r}_2\le\epsilon} D(r,x,\theta)
+    \approx \max_{\norm{r}_2\le\epsilon} \half r^T H(x,\theta) r = \half \epsilon^2 \norm{H(x,\theta)}_2.
+\end{equation*}
+Thus the VAT loss is,
+\begin{equation*}
+\begin{aligned}
+    &\Ebb_{\text{labeled data}} \ell(x,y,\theta) + \alpha\Ebb_{\text{all data}}R_{\text{vadv}} \\
+    =&\Ebb_{\text{labeled data}} \ell(x,y,\theta) + \frac{\alpha\epsilon^2}{2}\Ebb_{\text{all data}}\norm{H(x,\theta)}_2.
+\end{aligned}
+\end{equation*}
+Hence with a small perturbation, virtual adversarial regularization is equivalent to penalize the spectrum norm of the Hessian of $D(r, x, \theta)$ with respect to $r$.
+
+In the perspective of loss $\ell(x,y,\theta)$,
+\begin{equation*}
+    \ell(x+r,p(y|x),\theta)=D\left[p(y|x),p(y|x+r,\theta)\right] = D(r,x,\theta).
+\end{equation*}
+Thus the Hessian of $D(r,x,\theta)$ w.r.t. $r$ could also be viewed as the Hessian of $\ell(x+r, p(y|x), \theta)$ w.r.t. $r$, which is equal to the Hessian w.r.t. input $x$,
+\begin{equation*}
+    \grad^2_r \ell(x_*+r, p(y_*|x_*), \theta) = \grad^2_x \ell(x,y,\theta)|_{(x,y)=(x_*+r, p(y_*|x_*))}.
+\end{equation*}
+
+In summary, VAT penalizes the spectrum norm of the Hessian of $\ell$ with respect to the input.
+Different from $L_p$ norm of Jacobian, VAT defines a new type of smoothness on classifier, which is shown to be effective for semi-supervised learning~\cite{miyato2017virtual}.
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}

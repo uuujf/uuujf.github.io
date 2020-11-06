@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{mymath}
+
+\title{The Intrinsicness of Gradient Methods}
+\author{Jingfeng Wu}
+\date{Created: April 2018 \\ Last updated: \today}
+
+
+\begin{document}
+\maketitle
+
+We optimize a loss in the form of
+\begin{equation}\label{eq:loss}
+    L(\theta) = \Ebb_z [\ell(z;\theta)].
+\end{equation}
+Typically, $z = (x,y)$ is the data pair. The expectation is taken over some distribution over $z$, which could be the population distribution or the empirical distribution.
+
+Fixing initialization, by running an (convergent) optimization method we obtain a path from the initial point to the accumulation point. We call it optimization path.
+Then a natural question arises from the viewpoint of Differential Geometry:
+
+\emph{For changing of parameterization, will a certain optimization method generate the same optimization path?}
+
+If the answer is yes, we say the optimization method is intrinsic (with respect to the reparameterization).
+In the following, we will show that NGD is intrinsic for any invertible regular reparameterization, while GD is intrinsic for only orthogonal regular reparameterization.
+
+\section{The Intrinsicness of Gradient Descent}
+\begin{thm}[GD is intrinsic for orthogonal transformations]\label{thm:gd}
+NGD is invariant for any \textbf{orthogonal}, smooth reparameterization $\theta = \zeta (\gamma)$.
+\end{thm}
+\begin{proof}
+For parameterization $\gamma$ and $\theta=\zeta(\gamma)$, by assumption we have $J_{\zeta}^T J_{\zeta} = J_{\zeta} J_{\zeta}^T = I$.
+GD updates as
+\begin{equation}
+    \lap\theta = -\eta \grad_{\theta} L(\theta),\quad
+    \lap \gamma = -\eta \grad_{\gamma} L(\zeta(\gamma)).
+\end{equation}
+
+To see the intrinsicness of GD, we only need to show that
+$\zeta(\gamma + \lap\gamma)) \approx \theta + \lap\theta$.
+Suppose the step size $\eta$ is small enough for applying Taylor's expansion, then
+$\zeta(\gamma + \lap\gamma) \approx \zeta(\gamma) + J_{\zeta} \cdot \lap\gamma = \theta + J_{\zeta} \cdot \lap\gamma$,
+where $J_{\zeta}$ is the Jacobian of transformation $\zeta$.
+Thus we remind to show
+\begin{equation}
+    \lap\theta = J_{\zeta} \lap\gamma.
+\end{equation}
+
+Via chain rule, one have $\grad_{\gamma} L(\zeta(\gamma)) = J_{\zeta}^T \grad_{\theta} L(\theta)$, thus
+\begin{equation}
+    J_{\zeta} \lap \gamma = -J_{\zeta} \eta J_{\zeta}^T \grad_{\theta}L(\theta) = -\eta\grad_{\theta}L(\theta) = \lap \theta.
+\end{equation}
+The proof is completed.
+\end{proof}
+
+Remark:
+One can check that GD is not invariant for general \textbf{one-one} transformations.
+
+\section{The Intrinsicness of Natural Gradient Descent}
+In this section we focus on the invariance of gradient methods e.g., natural gradient descent (NGD) and gradient descent (GD), with respect to reparameteraization.
+Thus we do not rigorously distinguish Fisher, Empirical Fisher, Gradient Second Moment or Generalized Gauss-Newton matrix~\cite{kunstner2019limitations,martens2014new}.
+Our discussion holds for all of them.
+
+\begin{defi}[Fisher Information]
+For loss~\eqref{eq:loss}, the Fisher Information is defined as
+\begin{equation}
+    F(\theta) = \Ebb_{z} [\grad_{\theta}\ell(z;\theta) \grad_{\theta}\ell(z;\theta)^T].
+\end{equation}
+\end{defi}
+
+\begin{defi}[Natural Gradient Descent]
+For loss~\eqref{eq:loss}, the natural gradient descent (NGD) updates as~\cite{martens2014new}
+\begin{equation}
+    \theta_{t+1} = \theta_{t} - \eta F(\theta_t)^{-1} \grad_{\theta} L(\theta_t).
+\end{equation}
+\end{defi}
+
+Theorem~\ref{thm:ngd} indicates that NGD is invariant for any one-one (and regular) reparameterization.
+\begin{thm}[NGD is intrinsic for invertible transformations]\label{thm:ngd}
+NGD is invariant for any \textbf{one-one}, smooth reparameterization $\theta = \zeta (\gamma)$.
+\end{thm}
+\begin{proof}
+For parameterization $\gamma$ and $\theta=\zeta(\gamma)$, NGD updates as
+\begin{equation}
+    \lap\theta = -\eta F(\theta)^{-1}\grad_{\theta} L(\theta),\quad
+    \lap \gamma = -\eta F(\zeta(\gamma)))^{-1}\grad_{\gamma} L(\zeta(\gamma)).
+\end{equation}
+
+To see the intrinsicness of NGD, we only need to show that
+$\zeta(\gamma + \lap\gamma)) \approx \theta + \lap\theta$.
+Suppose the step size $\eta$ is small enough for applying Taylor's expansion, then
+$\zeta(\gamma + \lap\gamma) \approx \zeta(\gamma) + J_{\zeta} \cdot \lap\gamma = \theta + J_{\zeta} \cdot \lap\gamma$,
+where $J_{\zeta}$ is the Jacobian of transformation $\zeta$.
+Thus we remind to show
+\begin{equation}\label{eq:intrinsic}
+    \lap\theta = J_{\zeta} \lap\gamma.
+\end{equation}
+
+Via chain rule, one have $\grad_{\gamma} L(\zeta(\gamma)) = J_{\zeta}^T \grad_{\theta} L(\theta)$ and
+\begin{equation}
+\begin{aligned}
+    F(\zeta(\gamma)) = \Ebb_z [\grad_{\gamma} \ell(z;\zeta(\gamma)) \grad_{\gamma} \ell(z;\zeta(\gamma))^T] = J_{\zeta}^T \Ebb_{z} [\grad_{\theta}\ell(z;\theta) \grad_{\theta}\ell(z;\theta)^T] J_{\zeta} = J_{\zeta}^T F(\theta) J_{\zeta}.
+\end{aligned}
+\end{equation}
+Thus
+\begin{equation}
+    \lap\gamma = -\eta F(\zeta(\gamma))^{-1} \grad_{\gamma} L(\zeta(\gamma))
+    = -\eta J_{\zeta}^{-1} F(\theta)^{-1}J_{\zeta}^{-T} J_{\zeta}^T \grad_{\theta} L(\theta) 
+    = -\eta J_{\zeta}^{-1} F(\theta)^{-1} \grad_{\theta} h(\theta),
+\end{equation}
+and
+\begin{equation}
+    J_{\zeta} \cdot \lap\gamma 
+    = - J_{\zeta} \cdot \eta J_{\zeta}^{-1} F(\theta)^{-1} \grad_{\theta} L(\theta)
+    = - \eta F(\theta)^{-1} \grad_{\theta} L(\theta)
+    = \lap\theta.
+\end{equation}
+Hence the proof is finished.
+\end{proof}
+
+Remark: See~\cite{liang2017fisher} for discussions about overparameterized transformations.
+
+\section{The Intrinsicness of Newton's Method}
+\begin{defi}
+For loss~\eqref{eq:loss}, the Newton's method updates as
+\begin{equation}
+    \theta_{t+1} = \theta_t - \eta \left(H(\theta_t)\right)^{-1} \grad_{\theta} L(\theta_t),
+\end{equation}
+where $H(\theta_t) = \grad_{\theta}^2L(\theta_t)$ is the Hessian.
+\end{defi}
+Different from NGD, Newtons' method uses $H(\theta)$ as preconditioning instead of $F(\theta)$.
+For $\theta = \zeta(\gamma)$, we have
+\begin{equation}
+    H(\zeta(\gamma)) = \grad_{\gamma}^2 L(\zeta(\gamma)) = \grad_{\gamma}^2 \zeta(\gamma) \cdot \grad_{\theta} L(\theta) + J_{\zeta}^T \grad_{\theta}^2 L(\theta) J_{\zeta} = \grad_{\gamma}^2 \zeta(\gamma) \cdot \grad_{\theta} L(\theta) + J_{\zeta}^T H(\theta) J_{\zeta}.
+\end{equation}
+Comparing with the proof of Theorem~\ref{thm:ngd} and the fact that
+\begin{equation}
+    F(\zeta(\gamma)) = J_{\zeta}^T F(\theta) J_{\zeta},
+\end{equation}
+we know that Newton's method is intrinsic if and only if
+\begin{equation}
+    \grad_{\gamma}^2 \zeta(\gamma) \cdot \grad_{\theta} L(\theta) = 0 \quad \Leftrightarrow \quad \grad_{\gamma}^2 \zeta(\gamma) = 0,
+\end{equation}
+that is, $\theta = \zeta(\gamma)$ is an affine transformation.
+
+\begin{thm}[Newton's method is intrinsic for affine transformations]\label{thm:newton}
+NGD is invariant for any \textbf{affine}, smooth reparameterization $\theta = \zeta (\gamma)$.
+\end{thm}
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}

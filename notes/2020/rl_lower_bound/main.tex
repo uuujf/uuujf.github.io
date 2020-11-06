@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+
+\usepackage{mymath,natbib}
+
+
+\title{Lower Bounds for RL}
+\author{Jingfeng Wu}
+\date{Created: July, 2020\\ Last updated: \today}
+
+\begin{document}
+\maketitle
+
+\section{Preliminary}
+\subsection{Yao's principle}
+
+\begin{thm}[Yao's principle]
+Let $X$ be a finite set of inputs, $\Acal$ be a finite set of deterministic algorithms. Let $R$ be a random algorithm, i.e., an algorithm that is randomly drawn from set $\Acal$ according to certain distribution $\Rcal$. Let $\Dcal$ be a distribution over the input set $X$.
+Let $\cost(\Rcal, x) = \expect[A\sim \Rcal]{\cost(A,x)}$.
+Let $\cost(A, \Dcal) = \expect[x\sim \Dcal]{\cost(A,x)}$.
+Then we have
+\begin{align*}
+    \min_{\Rcal} \max_{x\in X} \cost(\Rcal, x) = \max_{\Dcal} \min_{A\in\Acal} \cost (A, \Dcal).
+\end{align*}
+\end{thm}
+\begin{cor}
+    \begin{align*}
+        \max_{x\in X} \cost(\Rcal, x) \ge \min_{A\in\Acal} \cost (A, \Dcal).
+    \end{align*}
+\end{cor}
+
+\subsection{Fano's inequality}
+
+\section{Regret lower bound}
+The lower bound is due to~\citep{auer2009near}.
+
+
+\section{PAC lower bound}
+The lower bound is due to~\citep{azar2013minimax}.
+
+\section{PAC lower bound for reward-free exploration}
+The lower bound is due to~\citep{jin2020reward}.
+
+
+\bibliographystyle{abbrvnat}
+\bibliography{ref}
+\end{document}

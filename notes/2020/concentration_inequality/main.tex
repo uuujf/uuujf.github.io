@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{mymath}
+
+\title{Awesome Concentration Inequalities}
+\author{Jingfeng Wu}
+\date{Created: May 2020\\ Last updated: \today}
+
+\begin{document}
+\maketitle
+
+\section{Concentration of one-dimensional random variables}
+\begin{thm}[Markov's inequality]
+Assume that $X\ge 0$ almost surely. Then
+$\prob{X\ge \epsilon} \le \frac{\expect{X}}{\epsilon}$.
+\end{thm}
+
+\begin{thm}[Chebychev's inequality]
+Assume $X$ has finite expectation and non-zero variance. Then
+\begin{enumerate}
+\item 
+$\prob{\abs{X-\expect{X}} \ge \epsilon} \le \frac{\var{X}}{\epsilon^2}$.
+\item With probability at least $1-\delta$,
+\begin{equation*}
+    \abs{X-\expect{X}} \le \sqrt{\frac{\var{X}}{\delta}}.
+\end{equation*}
+\end{enumerate}
+\end{thm}
+\begin{rmk}
+Let $\bar{X} = \frac{1}{m}\sum_{i=1}^m X_i$, then $\sqrt{\var{\bar{X}}} \sim \bigO{\frac{1}{\sqrt{m}}}$.
+Then Chebychev's inequality guarantees $\bar{X}$ converges in rate $\bigO{\frac{1}{\sqrt{m}}}$. 
+However, this is not a ``high probability'' result, since $\delta$ is not in a logarithm term --- in this case one cannot do a union bound on exponential many such random variables.
+\end{rmk}
+
+\begin{thm}[Chernoff bound]
+$\prob{X \ge \epsilon} \le \frac{\expect{e^{tX}}}{e^{t\epsilon}}$.
+\end{thm}
+
+\begin{thm}[Hoeffding's inequality]
+Let $Z_1, \dots, Z_m$ be independent random variables. Let $S_m = \sum_{i=1}^m Z_i$.
+Assume that 
+$a_i\le Z_i \le b_i$
+holds almost surely for $i\ge 1$.
+Then
+\begin{enumerate}
+\item 
+$\prob{ S_m - \expect{S_m} \ge \epsilon } \le \exp\left(\frac{-2 \epsilon^2}{\sum_{i=1}^m(b_i-a_i)^2}\right)$.
+\item
+With probability at least $1-\delta$,
+\begin{align*}
+S_m - \expect{S_m} \le \sqrt{\frac{\sum_{i=1}^m(b_i - a_i)^2}{2}\log\frac{1}{\delta}}. 
+\end{align*}
+\end{enumerate}
+\end{thm}
+
+\begin{rmk}
+According to Hoeffding's inequality, $\frac{S_m}{m}$ converges in rate $\bigOT{\frac{1}{\sqrt{m}}}$ with high probability.
+\end{rmk}
+
+\begin{thm}[Bernstein's inequality]
+Let  $Z_1, \dots, Z_m$ be independent random variables.  Let $S_m = \sum_{i=1}^m Z_i$.
+Assume that $\abs{Z_i} \le M $ holds almost surely for $i\ge 1$.
+Then
+\begin{enumerate}
+\item 
+$\prob{ S_m - \expect{S_m} \ge \epsilon } \le \exp \left( \frac{-\epsilon^2 / 2}{\sum_{i=1}^m \var{Z_i} + M \epsilon / 3} \right)$.
+\item With probability at least $1-\delta$,
+\begin{align*}
+S_m - \expect{S_m} 
+& \le \frac{M}{3}\log\frac{1}{\delta} + \sqrt{\frac{M^2}{9}\log^2\frac{1}{\delta} + 2\sum_{i=1}^m\var{Z_i} \log\frac{1}{\delta}} \\
+& \le \frac{2M}{3}\log\frac{1}{\delta} + \sqrt{2\sum_{i=1}^m\var{Z_i} \log\frac{1}{\delta}}.
+\end{align*}
+\end{enumerate}
+\end{thm}
+
+\begin{rmk}
+According to Bernstein's inequality, $\frac{S_m}{m}$ converges in rate $\bigOT{\frac{C_1}{m} + \frac{\var{Z_i}}{\sqrt{m}} }$ with high probability.
+Bernstein's inequality is very useful for eliminating some square root dependence in the convergence rate, if one can properly bound the variance term.
+\end{rmk}
+
+\begin{thm}[Empirical Bernstein's inequality]
+Let  $Z_1, \dots, Z_m$ be independent random variables.  Let $S_m = \sum_{i=1}^m Z_i$.
+Assume that $\abs{Z_i} \le M $ holds almost surely for $i\ge 1$.
+Then
+% \begin{enumerate}
+With probability at least $1-\delta$,
+\begin{align*}
+S_m - \expect{S_m} 
+% & \le \frac{M}{3}\log\frac{1}{\delta} + \sqrt{\frac{M^2}{9}\log^2\frac{1}{\delta} + 2\sum_{i=1}^m\var{Z_i} \log\frac{1}{\delta}} \\
+& \le \frac{7M}{3}\log\frac{1}{\delta} + \sqrt{2\sum_{i=1}^m\widehat{\Var}\sbracket{Z_i} \log\frac{1}{\delta}},
+\end{align*}
+where $\widehat{\Var}\sbracket{Z_i}:=\frac{1}{m(m-1)}\sum_{i<j}(Z_i-Z_j)^2$ is the empirical variance.
+% \end{enumerate}
+\end{thm}
+\begin{rmk}
+A proof comes from~\cite{maurer2009empirical}.
+For practical applications, we usually do not have access to the population variance, and empirical Bernstein's inequality enables us to analyze the concentration phenomena in these cases.
+\end{rmk}
+
+\begin{thm}[Azuma's inequality]
+Let $\set{X_0, X_1, \dots}$ be a martingale with respect to filtration $\set{\Fcal_0, \Fcal_1, \dots}$. 
+Assume that $A_i \le X_i - X_{i-1} \le B_i$ holds almost surely for $i\ge 1$.
+Then
+\begin{enumerate}
+\item 
+$\prob{X_m - X_0 \ge \epsilon} \le \exp\bracket{\frac{-2\epsilon^2}{\sum_{i=1}^m \bracket{B_i-A_i}^2}}$.
+\item With probability at least $1-\delta$,
+\begin{align*}
+X_m - X_0 \le \sqrt{\frac{\sum_{i=1}^m\bracket{B_i - A_i}^2}{2}\log\frac{1}{\delta}}.
+\end{align*}
+\end{enumerate}
+\end{thm}
+\begin{rmk}
+Azuma's inequality improves Hoeffding's inequality by replacing the independence assumption with a more general condition, \emph{martingale}.
+A typical application of Azuma's inequality is in the analysis of SGD.
+\end{rmk}
+
+
+
+\section{Concentration of distributions}
+
+\begin{thm}[Pinsker’s inequality]
+Let $P$ and $Q$ be two probability distributions over a measurable space $(X, \Sigma)$. Then
+\begin{enumerate}
+\item
+$\norm{P - Q}_{\infty} \le \sqrt{\half \kld{P}{Q}}$.
+\item
+$\norm{P - Q}_{1} \le \sqrt{2 \kld{P}{Q}}$.
+\end{enumerate}
+\end{thm}
+
+
+\begin{thm}[$\ell_1$-deviation of the empirical distribution]
+Let $P$ be a probability distribution over a finite discrete measurable space $\bracket{X,\Sigma}$. 
+Let $\widehat{P}_m$ be the empirical distribution of $P$ estimated from $m$ observations.
+Then with probability at least $1-\delta$,
+\begin{align*}
+    \norm{\widehat{P}_m - P}_1 \le \sqrt{\frac{2\abs{X}}{m}\log\frac{1}{\delta}}.
+\end{align*}
+\end{thm}
+\begin{rmk}
+A proof comes from~\cite{weissman2003inequalities}.
+\end{rmk}
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}

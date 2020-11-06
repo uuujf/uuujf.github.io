@@ -1,0 +1,123 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{mymath}
+
+\title{Empirical Fisher, Gradient Covariance, Gauss-Newton Matrix, Fisher and Hessian}
+\author{Jingfeng Wu}
+\date{Created: July 2019\\ Last updated: \today}
+
+\begin{document}
+
+\maketitle
+
+This short notes aim to clarify the relationship between the so called \emph{Empirical Fisher $\tilde{F}$}, \emph{Gradient Covariance $C$}, \emph{Gauss-Newton matrix $G$}, \emph{Fisher $F$} and \emph{Hessian $H$}. See ~\cite{kunstner2019limitations,martens2014new,thomas2019information} for more detailed discussions.
+
+\section{Definitions}
+Let $p_D(y|x)$ be the population distribution, and $p_{\theta}(y|x)$ be our model parameterized by $\theta$.
+$D_N:=\{x_n,y_n\}_{n=1}^N$ denote the observed data pair.
+
+To learn the model from observations, consider the max log-likelihood estimation, i.e., $\ell(x,y;\theta)=- \log p_{\theta}(y|x)$
+we minimize the following loss:
+\begin{equation*}
+    \min_{\theta} L(\theta) := - \Ebb_{D_N}\log p_{\theta}(y_n|x_n) = \Ebb_{D_N} \ell(x_n,y_n;\theta).
+\end{equation*}
+Let $g_{\theta}(x,y):=\grad_{\theta}\ell(x,y;\theta)$ be the gradient of loss at point $(x,y)$.
+
+\begin{defi}[Empirical Fisher]
+\begin{equation*}
+\begin{aligned}
+    \tilde{F}(\theta) :=& \Ebb_{(x_n,y_n)\in D_N}\left[ \grad_{\theta} \log p_{\theta}(y_n|x_n) \grad_{\theta} \log p_{\theta}(y_n|x_n)^T \right] \\
+    =& \Ebb_{(x_n,y_n)\in D_N}\left[ g_{\theta}(x_n,y_n)g_{\theta}(x_n,y_n)^T \right].
+\end{aligned}
+\end{equation*}
+\end{defi}
+
+\begin{defi}[Fisher]
+\begin{equation*}
+    \begin{aligned}
+        F(\theta) :=& \Ebb_{x\in D_N} \Ebb_{y\sim p_{\theta}(y|x_n)}\left[ \grad_{\theta} \log p_{\theta}(y|x_n) \grad_{\theta} \log p_{\theta}(y|x_n)^T \right] \\
+    =& \Ebb_{x_n\in D_N} \Ebb_{y\sim p_{\theta}(y|x_n)}\left[ g_{\theta}(x_n,y)g_{\theta}(x_n,y)^T \right].
+    \end{aligned}
+\end{equation*}
+\end{defi}
+
+\begin{defi}[Gradient Covariance]
+\begin{equation*}
+    \begin{aligned}
+        C(\theta) :=& \Ebb_{(x_n,y_n)\in D_N} \left[ \left(g_{\theta}(x_n,y_n) - \grad_{\theta}L(\theta) \right)\left(g_{\theta}(x_n,y_n) - \grad_{\theta}L(\theta) \right)^T \right] \\
+        =& \tilde{F}(\theta) - \grad_{\theta}L(\theta) \grad_{\theta}L(\theta)^T.
+    \end{aligned}
+\end{equation*}
+\end{defi}
+
+\begin{defi}[Hessian]
+\begin{equation*}
+    H(\theta):= \grad_{\theta}^2 L(\theta).
+\end{equation*}
+\end{defi}
+
+\section{Clarification}
+\begin{enumerate}
+    \item All the notations are actually ``empirical'', i.e., none of them rely on the population distribution of observed data.
+    \item Fisher is originally adopted for scoring (Fisher's scoring~\cite{longford1987fast}). Fisher involves the expectation of label $y$ w.r.t. current learned model $p_{\theta}(y|x)$, which measures the information contained in the model, thus it is also called the \emph{Fisher information}.
+    \item The convention of Empirical Fisher is a little bit misleading. Empirical Fisher is not the empirical realization of Fisher. As pointed before, the Fisher itself is an empirical notation.
+    In contrast, Empirical Fisher should be called \emph{the second moment of gradients}, as $C(\theta) = \tilde{F}(\theta) - \grad_{\theta}L(\theta) \grad_{\theta}L(\theta)^T$.
+\end{enumerate}
+
+Now we are crystal clear about the exact definition of each matrices. However, in literature, the usage of the matrices is often miss specified, especially for Fisher and Empirical Fisher. Lots of papers mistakenly use Empirical Fisher as Fisher. 
+Indeed, Empirical Fisher approximates Fisher under some conditions, which are described below.
+
+\section{The approximation of the matrices}
+Now we talk about when the matrices would approximate to the others.
+
+\begin{prop}[$C \approx \tilde{F}$]
+For any minima $\theta^*$ of loss $L(\theta)$, local or global, true or not true, we have
+\begin{equation*}
+    C(\theta^*) = \tilde{F}(\theta^*).
+\end{equation*}
+\end{prop}
+
+\begin{prop}[$\tilde{F} \approx F$]
+If 1) the number of observed data is large enough $N\to \infty$,
+then 2) for the true minima $\theta_0$ (i.e., $p_{\theta_0}(y|x) = p_D(y|x)$), we have
+\begin{equation*}
+    \tilde{F}(\theta_0) \approx F(\theta_0).
+\end{equation*}
+\end{prop}
+
+
+\begin{prop}[$F \approx H$]
+If 1) the number of observed data is large enough $N\to \infty$,
+then 2) for the true minima $\theta_0$ (i.e., $p_{\theta_0}(y|x) = p_D(y|x)$), we have
+\begin{equation*}
+    F(\theta_0) \approx \tilde H(\theta_0).
+\end{equation*}
+
+\end{prop}
+
+
+\section{The Generalized Gauss-Newton Decomposition}
+We consider the negative log likelihood loss\footnote{For $L_2$ loss, there is a similar form of decomposition, too.}:
+\begin{equation*}
+\begin{aligned}
+    &\ell(x;\theta) = - \log p(x;\theta),\\
+    &L(\theta) = \Ebb_{x} \ell(x;\theta) = - \Ebb_{x}\log p(x;\theta).
+\end{aligned}
+\end{equation*}
+
+The following Gauss-Newton decomposition connects the Hessian $H(\theta):=\grad_{\theta}^2L(\theta)$
+and the Fisher $F(\theta)$:
+\begin{equation*}
+\begin{aligned}
+    H(\theta) &= -\Ebb_x\grad_{\theta} \left( \frac{\partial l}{\partial p}\frac{\partial p(x;\theta)}{\partial \theta} \right)\\
+    &= -\Ebb_x\grad_{\theta} \left( \frac{1}{p(x;\theta)}\frac{\partial p(x;\theta)}{\partial \theta} \right)\\
+    &= \Ebb_x \left(\frac{1}{p(x;\theta)^2}\frac{\partial p(x;\theta)}{\partial \theta}^T\frac{\partial p(x;\theta)}{\partial \theta}\right) - \Ebb_x\left(\frac{1}{p(x;\theta)}\frac{\partial^2 p(x;\theta)}{\partial \theta^2}\right)\\
+    &= \Ebb_x \left(\frac{\partial \log p(x;\theta)}{\partial \theta}^T\frac{\partial \log p(x;\theta)}{\partial \theta}\right) - \Ebb_x\left(\frac{1}{p(x;\theta)}\frac{\partial^2 p(x;\theta)}{\partial \theta^2}\right)\\
+    &=F(\theta)  - \Ebb_x\left(\frac{1}{p(x;\theta)}\frac{\partial^2 p(x;\theta)}{\partial \theta^2}\right).
+\end{aligned}
+\end{equation*}
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}

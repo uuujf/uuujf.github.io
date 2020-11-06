@@ -1,0 +1,176 @@
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item\small{
+    \textbf{#1}{: #2 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\href{https://uuujf.github.io/}{\Large Jingfeng Wu}} & Email : \href{mailto:uuujingfeng@gmail.com}{uuujingfeng@gmail.com}\\
+  \href{https://uuujf.github.io/}{https://uuujf.github.io} & Mobile : +1~443~743~8370 \\
+\end{tabular*}
+
+
+%-----------EDUCATION-----------------
+\section{Education}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Johns Hopkins University, Department of Computer Science}{Baltimore, USA}
+{Ph.D. student in Computer Science}{Aug. 2019 -- Now}
+\resumeSubheading
+{Peking University, School of Mathematical Sciences}{Beijing, China}
+{Master of Science in Applied Mathematics}{Sep. 2016 -- July 2019}
+\resumeSubheading
+{Peking University, School of Mathematical Sciences}{Beijing, China}
+{Bachelor of Science in Mathematics and Applied Mathematics}{Sep. 2012 -- July 2016}
+\resumeSubHeadingListEnd
+
+
+
+%-----------Research-----------------
+\section{Research Interests}
+\resumeSubHeadingListStart
+\item{Stochastic algorithms, online learning, reinforcement learning, theory motivated applications}
+\resumeSubHeadingListEnd
+
+%-----------Experience-----------------
+\section{Experiences}
+\resumeSubHeadingListStart
+
+\resumeSubheading
+{Johns Hopkins University}{Baltimore, USA}
+{Research Assistant}{Aug. 2019 - Now}
+% \resumeItemListStart
+% \resumeItem{Obtaining regularization via iterate averaging}
+% {We studied the regularization effect of performing iterate averaging. We showed that one can achieve adjustable $\ell_2$-type regularization for free by averaging the optimization path for many algorithms and objectives.}
+% \resumeItemListEnd
+
+\resumeSubheading
+{Baidu Big Data Lab}{Beijing, China}
+{Research Intern}{Dec. 2018 - May. 2019}
+% \resumeItemListStart
+% \resumeItem{The multiplicative noise of SGD}
+% {We re-interpreted the noise in stochastic gradient descent (SGD) from the perspective of mini-batch sampling. We showed that the noise distribution class is not important for its regularization effects.}
+% \resumeItemListEnd
+
+\resumeSubheading
+{Peking University}{Beijing, China}
+{Research Assistant}{July. 2017 - Dec. 2018}
+% \resumeItemListStart
+% \resumeItem{The anisotropic noise of SGD}
+% {We studied the importance of the anisotropic noise in stochastic gradient descent (SGD) and its benefits helping the dynamics escape from sharp minima. We demonstrated that the anisotropic noise of SGD was closely related to its good generalization performance.}
+% \resumeItem{TNAR for semi-supevised learning}
+% {We came up with a novel method for semi-supervised learning (SSL): tangent-normal adversarial regularization (TNAR). We in the first time applied adversarial training regime to realize manifold regularization for SSL. Experiments show that TNAR achieves state-of-the-art performance on SSL benchmarks.}
+% \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+
+% --------Services------------
+\section{Services}
+\resumeSubHeadingListStart
+\resumeSubItem{Reviewer}{ICML 2020, NeurIPS 2020, ICLR 2021}
+\resumeSubItem{PC Member}{AAAI 2021}
+\resumeSubHeadingListEnd
+
+
+%-----------Teaching---------------------
+\section{Teaching}
+\resumeSubHeadingListStart
+\item{TA, fall 2018, Peking University: Introduction to Data Science}
+\item{TA, fall 2017, Peking University: Advanced Algebra (I)}
+\item{TA, spring 2017, Peking University: Probability and Mathematical Statistics}
+\item{TA, fall 2016, Peking University: Geometry} 
+\resumeSubHeadingListEnd
+
+%-----------PUBLICATIONS-----------------
+\section{Publications and Preprints}
+\resumeSubHeadingListStart
+\item{\textbf{Jingfeng Wu}, Difan Zou, Vladimir Braverman and Quanquan Gu. ``Direction Matters: On the Implicit Regularization Effect of Stochastic Gradient Descent with Moderate Learning Rate.'' Workshop on Optimization for Machine Learning (OPT), 2020.}
+\item{\textbf{Jingfeng Wu}, Vladimir Braverman and Lin F. Yang. ``Obtaining Adjustable Regularization for Free via Iterate Averaging.'' International Conference on Machine Learning (ICML), 2020.}
+\item{\textbf{Jingfeng Wu}, Wenqing Hu, Haoyi Xiong, Jun Huan, Vladimir Braverman and Zhanxing Zhu. ``On the Noisy Gradient Descent that Generalizes as SGD.'' International Conference on Machine Learning (ICML), 2020.}
+\item{Bing Yu*, \textbf{Jingfeng Wu}*, Zhanxing Zhu, and Jinwen Ma. ``Tangent-Normal Adversarial Regularization for Semi-supervised Learning.'' Conference on Computer Vision and Pattern Recognition (CVPR) 2019.}
+\item{Zhanxing Zhu*, \textbf{Jingfeng Wu}*, Bing Yu, Lei Wu, and Jinwen Ma. ``The Anisotropic Noise in Stochastic Gradient Descent: Its Behavior of Escaping from Minima and Regularization Effects.'' International Conference on Machine Learning (ICML) 2019.}
+\resumeSubHeadingListEnd
+
+%-------------------------------------------
+
+
+
+% %-----------AWARDS-----------------
+% \section{Awards}
+% \resumeSubHeadingListStart
+% \item{2016-2017 Merit Student}
+% \item{2017-2018 Merit Student}
+% \resumeSubHeadingListEnd
+
+
+\end{document}

@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage{mymath}
+
+\title{Importance Sampling for Reducing the Variance of SGD}
+\author{Jingfeng Wu}
+\date{Created: November 2019\\ Last updated: \today}
+
+\begin{document}
+\maketitle
+
+This is a brief note on importance sampling~\cite{alain2015variance,chen2019fast} and its application on reducing SGD variance.
+
+\section{Importance sampling}
+Let $i$ be the index random variable sampled from $[n] = \{1,2,\dots,n\}$, $i\sim p(i)$, $\sum_{i=1}^n p(i)=1,\ p(i)\in [0,1]$.
+Let $X(i)$ be a sequence of random variables drawn with respect to index $i$. 
+% Suppose for index $i=j$, $X(i)=X(j)$; for index $i\ne j$, $X(i), X(j)$ are i.i.d.
+
+In the context of importance sampling, we suppose different indexes have different ``importance'', and we would like to see important examples more frequently. 
+Concisely, given an sequence of importance variable $w(i) \in (0,+\infty)$. 
+For technical reason, assume $\Ebb [w(i)] = \sum_{i=1}^k p(i) w(i) = 1$.
+Then we can re-weight index random variable as $i\sim p^w(i) = w(i)p(i)$.
+Note that $\sum_{i=1}^n w(i)p(i) = 1$, thus $p^w(i) = w(i)p(i)$ is a well defined distribution.
+For simplicity, we use $\Ebb$ to represent taking expectation with respect to $i\sim p(i)$, and $\Ebb^{w}$ to denote taking expectation with respect to $i\sim p^{w}(i)$.
+
+Now consider a random variable $X(i)$. If we re-weight the distribution of index $i$, we will end up with a biased estimator of $X(i)$ in general. 
+This is because generally
+\begin{equation}
+    \Ebb^w [X(i)] = \sum_{i=1}^n w(i)p(i) X(i) \ne \sum_{i=1}^n p(i) X(i) = \Ebb [X(i)].
+\end{equation}
+Not too surprisingly, we can correct this issue by re-weighting $X(i)$.
+\begin{lem}\label{thm:importance-sampling}
+If $X(i)$ is re-weighted as $\frac{1}{w(i)}X(i)$, then importance sampling generate an unbiased estimator, i.e.,
+\begin{equation}
+    \Ebb^w \frac{1}{w(i)}X(i) = \Ebb X(i).
+\end{equation}
+\end{lem}
+\begin{proof}
+By definition.
+\end{proof}
+
+The intuition of Lemma~\ref{thm:importance-sampling} is that
+we can estimate a random variable by seeing important examples more often, but use them less. 
+
+
+\section{Variance reduction}
+Importance sampling keeps the first order moment. 
+However it leads to different high order moments.
+For example, we now explore how to reduce variance of SGD by importance sampling.
+
+Let $g(i)$ be the gradient of loss with respect to the $i$-th example.
+By lemma~\ref{thm:importance-sampling} we know that applying importance sampling would not change the expectation of SGD, i.e., $\Ebb^w [\frac{g(i)}{w(i)}] = \Ebb [g(i)]$.
+We turn to calculate its variance.
+\begin{equation}
+\begin{aligned}
+    \tr {\Var}^w[g(i)] = \Ebb^w \left[\frac{g(i)^T g(i)}{w(i)^2}\right] - (\Ebb^w [g(i)])^T(\Ebb^w [g(i)]) = \Ebb^w \left[\frac{g(i)^T g(i)}{w(i)^2}\right] - (\Ebb [g(i)])^T(\Ebb [g(i)]).
+\end{aligned}
+\end{equation}
+By Jesen's inequality, we have
+\begin{equation}
+\begin{aligned}
+    &\Ebb^w \left[\frac{g(i)^T g(i)}{w(i)^2}\right] = \sum_{i=1}^n w(i)p(i)\frac{g(i)^T g(i)}{w(i)^2} \\
+    \ge& \left(\sum_{i=1}^n w(i)p(i)\frac{\norm{g(i)}_2}{w(i)}\right)^2 = \left(\sum_{i=1}^n p(i)\norm{g(i)}_2\right)^2 = \left(\Ebb[\norm{g(i)}_2]\right)^2.
+\end{aligned}
+\end{equation}
+The inequality becomes equality if and only if $w(i)\propto \norm{g(i)}_2$, i.e.
+\begin{equation}
+    w(i) = \frac{\norm{g(i)}_2}{\sum_{i=1}^n p(i)\norm{g(i)}_2} = \frac{\norm{g(i)}_2}{\Ebb[\norm{g(i)}_2]}.
+\end{equation}
+When this ``optimal'' importance sampling happens, we reduce the variance of vanilla SGD in the scale of
+\begin{equation}
+    \Ebb[g(i)^T g(i)] - \left(\Ebb[\norm{g(i)}_2]\right)^2 \ge 0.
+\end{equation}
+For an example, if $p(i) = \frac{1}{n}$, and the norm of gradients vary quite a lot, then importance sampling indeed reduces the variance of SGD significantly.
+
+However, one should notice that even with importance sampling, the variance of SGD is at least 
+\begin{equation}
+    \left(\Ebb[\norm{g(i)}_2]\right)^2 - (\Ebb [g(i)])^T(\Ebb [g(i)]) \ge 0.
+\end{equation}
+
+In the end, the optimal importance sampling for reducing SGD variance requires the information of the gradient norm of all samples, which is often impractical.
+There are some nice solutions for this problem, e.g., using LSH~\cite{chen2019fast}.
+
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}
