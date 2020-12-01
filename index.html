@@ -1,11 +1,30 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 
+
 <head>
   <meta charset="utf-8">
   <meta name=viewport content="width=800">
   <meta name="generator" content="HTML Tidy for Linux/x86 (vers 11 February 2007), see www.w3.org">
   <style type="text/css">
+    .sidenav {
+      width: 150px;
+      position: fixed;
+      z-index: 1;
+      top: 100px;
+      left: 100px;
+      /* background: #eee; */
+      overflow-x: hidden;
+      padding: 10px;
+    }
+
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      font-size: 16px;
+      display: block;
+    }
+
+
     /* Color scheme stolen from Sergey Karayev */
 
     a {
@@ -90,44 +109,61 @@
     type='text/css'>
 </head>
 
-<body>
-  <table width="800" border="0" align="center" cellspacing="0" cellpadding="10">
 
-    <tr>
-      <td>
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td width="67%" valign="middle">
-              <p align="center">
-                <name>Jingfeng Wu / 吴京风</name>
-              </p>
-              <p>
-                I am a Ph.D. student at <a href="https://www.cs.jhu.edu">Johns Hopkins University, Computer Science Department</a>. I am supervised by <a
-                  href="http://www.cs.jhu.edu/~vova/">Prof. Vladimir Braverman</a>.
-                Previously, I obtained my B.S. (Mathematics) and M.S. (Applied Math) at <a href="https://www.math.pku.edu.cn">Peking University, School of Mathematical Sciences</a>.
-              </p>
-              <p align=center>
-                <a href="mailto:uuujingfeng@gmail.com">Email</a> &nbsp/&nbsp
-                <a href="cv/cv.pdf">CV</a> &nbsp/&nbsp
-                <a href="https://scholar.google.com/citations?user=z-KILD8AAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
-                <a href="https://github.com/uuujf"> Github </a> &nbsp/&nbsp
-                <a href="https://twitter.com/uuujingfeng">Twitter</a>
-              </p>
-            </td>
-            <td width="33%">
-              <img src="files/wjf.png">
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+<!-- Side navigation -->
+<div class="sidenav">
+  <a href="#about">About</a>
+  <a href="#news">News</a>
+  <a href="#research">Research</a>
+  <a href="#services">Services</a>
+  <a href="#experiences">Experiences</a>
+</div>
 
-    <tr>
-      <td>
-        <details open>
-          <summary>
+<!-- Page content -->
+<div class="main">
+
+  <body>
+    <table width="800" border="0" align="center" cellspacing="0" cellpadding="10">
+
+      <tr>
+        <td>
+          <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+            <tr>
+              <td width="67%" valign="middle">
+                <div id="about">
+                  <p align="center">
+                    <name>Jingfeng Wu / 吴京风</name>
+                  </p>
+                </div>
+                <p>
+                  I am a second year Ph.D. student at <a href="https://www.cs.jhu.edu">Johns Hopkins University,
+                    Computer Science
+                    Department</a>. I am supervised by <a href="http://www.cs.jhu.edu/~vova/">Prof. Vladimir
+                    Braverman</a>.
+                  Previously, I obtained my B.S. (Mathematics) and M.S. (Applied Math) from <a
+                    href="https://www.math.pku.edu.cn">Peking University, School of Mathematical Sciences</a>.
+                </p>
+                <p align=center>
+                  <a href="mailto:uuujingfeng@gmail.com">Email</a> &nbsp/&nbsp
+                  <a href="cv/cv.pdf">CV</a> &nbsp/&nbsp
+                  <a href="https://scholar.google.com/citations?user=z-KILD8AAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
+                  <a href="https://github.com/uuujf"> Github </a> &nbsp/&nbsp
+                  <a href="https://twitter.com/uuujingfeng">Twitter</a>
+                </p>
+              </td>
+              <td width="33%">
+                <img src="files/wjf.png">
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div id="news">
             <heading>News</heading>
-          </summary>
+          </div>
 
           <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
             <tr>
@@ -161,17 +197,15 @@
             </tr>
           </table>
 
-        </details>
-      </td>
-    </tr>
+        </td>
+      </tr>
 
 
-    <tr>
-      <td>
-        <details open>
-          <summary>
+      <tr>
+        <td>
+          <div id="research">
             <heading>Research</heading>
-          </summary>
+          </div>
 
           <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
             <tr>
@@ -192,7 +226,8 @@
               </td>
               <td width="75%" valign="top">
                 <a href="papers/2020/morl/paper.pdf">
-                  <papertitle>Accommodating Picky Customers: Regret Bound and Exploration Complexity for Multi-Objective Reinforcement Learning</papertitle>
+                  <papertitle>Accommodating Picky Customers: Regret Bound and Exploration Complexity for Multi-Objective
+                    Reinforcement Learning</papertitle>
                 </a>
                 <br>
                 <strong>Jingfeng Wu</strong>, Vladimir Braverman, Lin F. Yang
@@ -201,7 +236,8 @@
                 <br>
                 <a href="papers/2020/morl/ref.bib">bibtex</a> / <a href="https://arxiv.org/abs/2011.13034">arXiv</a>
                 <p>
-                  We study the regret bound and sample complexity for multi-objective reinforcement learning with potentially adversarial preferences.
+                  We study the regret bound and sample complexity for multi-objective reinforcement learning with
+                  potentially adversarial preferences.
                 </p>
               </td>
             </tr>
@@ -219,7 +255,9 @@
                 <br>
                 (Short version) <em>Workshop on Optimization for Machine Learning (OPT)</em>, 2020
                 <br>
-                <a href="papers/2020/sgdbias/ref.bib">bibtex</a> / <a href="https://arxiv.org/abs/2011.02538">arXiv</a> / <a href="papers/2020/sgdbias/slides.pdf">slides</a> / <a href="papers/2020/sgdbias/poster.pdf">poster</a> 
+                <a href="papers/2020/sgdbias/ref.bib">bibtex</a> / <a href="https://arxiv.org/abs/2011.02538">arXiv</a>
+                / <a href="papers/2020/sgdbias/slides.pdf">slides</a> / <a
+                  href="papers/2020/sgdbias/poster.pdf">poster</a>
                 <p>
                   We show a directional regularization effect for SGD with moderate learning rate. This
                   particular effect cannot be achieved by GD or SGD with small learning rate.
@@ -327,16 +365,14 @@
 
           </table>
 
-        </details>
-      </td>
-    </tr>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        <details open>
-          <summary>
-            <heading>Service</heading>
-          </summary>
+      <tr>
+        <td>
+          <div id="services">
+            <heading>Services</heading>
+          </div>
 
           <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
             <tr>
@@ -351,16 +387,14 @@
             </tr>
           </table>
 
-        </details>
-      </td>
-    </tr>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        <details open>
-          <summary>
+      <tr>
+        <td>
+          <div id="experiences">
             <heading>Experiences</heading>
-          </summary>
+          </div>
 
           <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
             <tr>
@@ -377,57 +411,58 @@
             </tr>
           </table>
 
-        </details>
-      </td>
-    </tr>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        <details>
-          <summary>
-            <heading>Miscellaneous</heading>
-          </summary>
+      <!-- <tr>
+        <td>
+          <details>
+            <summary>
+              <heading>Miscellaneous</heading>
+            </summary>
 
+            <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
+              <tr>
+                <td width="100%" valign="middle">
+                  <dl>
+                    <dt>2020</dt>
+                    <dd>- <a href="notes/2020/concentration_inequality/main.pdf">Awesome Concentration Inequalities</a>
+                    </dd>
+                    <dt>2019</dt>
+                    <dd>- <a href="notes/2019/importance_sampling/main.pdf">Importance Sampling</a></dd>
+                    <dd>- <a href="notes/2019/empirical_fisher/main.pdf">Empirical Fisher Approximation</a></dd>
+                    <dt>2018</dt>
+                    <dd>- <a href="notes/2018/adversarial_regularization/main.pdf">Adversarial Regularization</a></dd>
+                    <dd>- <a href="notes/2018/intrisic_gd/main.pdf">Intrinsic Gradient Descent</a></dd>
+                    <dd>- <a href="notes/2018/vae/main.pdf">Variational Inference</a></dd>
+                  </dl>
+                </td>
+              </tr>
+            </table>
+
+          </details>
+        </td>
+      </tr> -->
+
+      <tr>
+        <td>
           <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
             <tr>
-              <td width="100%" valign="middle">
-                <dl>
-                  <dt>2020</dt>
-                  <dd>- <a href="notes/2020/concentration_inequality/main.pdf">Awesome Concentration Inequalities</a>
-                  </dd>
-                  <dt>2019</dt>
-                  <dd>- <a href="notes/2019/importance_sampling/main.pdf">Importance Sampling</a></dd>
-                  <dd>- <a href="notes/2019/empirical_fisher/main.pdf">Empirical Fisher Approximation</a></dd>
-                  <dt>2018</dt>
-                  <dd>- <a href="notes/2018/adversarial_regularization/main.pdf">Adversarial Regularization</a></dd>
-                  <dd>- <a href="notes/2018/intrisic_gd/main.pdf">Intrinsic Gradient Descent</a></dd>
-                  <dd>- <a href="notes/2018/vae/main.pdf">Variational Inference</a></dd>
-                </dl>
+              <td><br>
+                <p align="right">
+                  <font size="2">
+                    Template: <a href="https://jonbarron.info/">this</a>
+                  </font>
+                </p>
               </td>
             </tr>
           </table>
+        </td>
+      </tr>
 
-        </details>
-      </td>
-    </tr>
+    </table>
+  </body>
 
-    <tr>
-      <td>
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-          <tr>
-            <td><br>
-              <p align="right">
-                <font size="2">
-                  Template: <a href="https://jonbarron.info/">this</a>
-                </font>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-
-  </table>
-</body>
+</div>
 
 </html>
