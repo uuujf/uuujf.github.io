@@ -1,0 +1,6 @@
+@article{zou2022risk,
+  title={Risk Bounds of Multi-Pass SGD for Least Squares in the Interpolation Regime},
+  author={Zou, Difan and Wu, Jingfeng and Braverman, Vladimir and Gu, Quanquan and Kakade, Sham M},
+  journal={The 36th Conference on Neural Information Processing Systems},
+  year={2022}
+}

@@ -1,0 +1,7 @@
+@inproceedings{yu2019tangent,
+  title={Tangent-normal adversarial regularization for semi-supervised learning},
+  author={Yu, Bing and Wu, Jingfeng and Ma, Jinwen and Zhu, Zhanxing},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  pages={10676--10684},
+  year={2019}
+}

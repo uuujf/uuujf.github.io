@@ -1,0 +1,6 @@
+@article{zou2021benign,
+  title={Benign overfitting of constant-stepsize sgd for linear regression},
+  author={Zou, Difan and Wu, Jingfeng and Braverman, Vladimir and Gu, Quanquan and Kakade, Sham M},
+  journal={The 34th Annual Conference on Learning Theory},
+  year={2021}
+}

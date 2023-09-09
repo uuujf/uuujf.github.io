@@ -1,0 +1,6 @@
+@article{wu2022power,
+  title={The Power and Limitation of Pretraining-Finetuning for Linear Regression under Covariate Shift},
+  author={Wu, Jingfeng and Zou, Difan and Braverman, Vladimir and Gu, Quanquan and Kakade, Sham M},
+  journal={The 36th Conference on Neural Information Processing Systems},
+  year={2022}
+}

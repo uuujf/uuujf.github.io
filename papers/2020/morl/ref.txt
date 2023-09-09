@@ -1,0 +1,6 @@
+@article{wu2021accommodating,
+  title={Accommodating Picky Customers: Regret Bound and Exploration Complexity for Multi-Objective Reinforcement Learning},
+  author={Wu, Jingfeng and Braverman, Vladimir and Yang, Lin F},
+  journal={The 35th Conference on Neural Information Processing Systems},
+  year={2021}
+}

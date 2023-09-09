@@ -1,0 +1,6 @@
+@article{wu2023finite,
+  title={Finite-Sample Analysis of Learning High-Dimensional Single ReLU Neuron},
+  author={Wu, Jingfeng and Zou, Difan and Chen, Zixiang and Braverman, Vladimir and Gu, Quanquan and Kakade, Sham M},
+  journal={The 40th International Conference on Machine Learning},
+  year={2023}
+}
