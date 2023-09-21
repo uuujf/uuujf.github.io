@@ -1,6 +1,6 @@
 @article{wu2023implicit,
   title={Implicit Bias of Gradient Descent for Logistic Regression at the Edge of Stability},
   author={Wu, Jingfeng and Braverman, Vladimir and Lee, Jason D},
-  journal={arXiv preprint arXiv:2305.11788},
+  journal={The 37th Conference on Neural Information Processing Systems},
   year={2023}
 }
