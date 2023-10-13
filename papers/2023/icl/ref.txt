@@ -1,0 +1,8 @@
+@misc{wu2023pretraining,
+      title={How Many Pretraining Tasks Are Needed for In-Context Learning of Linear Regression?}, 
+      author={Jingfeng Wu and Difan Zou and Zixiang Chen and Vladimir Braverman and Quanquan Gu and Peter L. Bartlett},
+      year={2023},
+      eprint={2310.08391},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML}
+}
