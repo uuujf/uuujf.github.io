@@ -1,0 +1,176 @@
+%% https://github.com/dcetin/Simple-CV
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Choose bibliography style for formatting list of publications
+\usepackage[backend=biber,bibstyle=numeric,sorting=none,sortcites=true,natbib=true,defernumbers=true,maxbibnames=99,giveninits=true,uniquename=false]{biblatex}
+\addbibresource{jwu.bib}
+
+% Choose a theme, e.g. black, RedViolet, ForestGreen, MidnightBlue
+\def\theme{NavyBlue}
+\usepackage{simplecv}
+
+\boldname{Wu}{Jingfeng}{J.}
+
+\begin{document}
+
+% Heading
+\headinginline{Jingfeng Wu}{
+    Website: \website{uuujf.github.io} \\ 
+    Email: \email{uuujf@berkeley.edu} 
+}
+
+% \headingphoto{Jingfeng Wu}{
+%     Website: \website{uuujf.github.io} \\ 
+%     Email: \email{uuujf@berkeley.edu} \\
+% }{jwu_2023.png}
+
+
+\section{Academic Experience}
+\outerlist{
+\entrybig
+	{\textbf{University of California, Berkeley}}{Berkeley, US}
+	{Postdoctoral Fellow}{2023 - Onwards}
+\innerlist{
+	\entry{Advisors: Peter Bartlett and Bin Yu}
+	\entry{Part of the NSF/Simons Collaboration on the Theoretical Foundations of Deep Learning}
+}
+}
+
+\section{Education}
+\outerlist{
+\entrybig
+{\textbf{Johns Hopkins University}}{Baltimore, US}
+{Ph.D.\ in Computer Science}{2019 - 2023}
+\innerlist{
+    \entry{Advisor: Vladimir Braverman}
+	\entryextra{Thesis: ``Risk Convergence and Algorithmic Regularization of Discrete-Stepsize (Stochastic) Gradient Descent''}
+}
+\entryBig
+{\textbf{Peking University}}{Beijing, CN}
+{M.S.\ in  Applied Mathematics}{2016 - 2019}
+{B.S.\ in Mathematics and Applied Mathematics}{2012 - 2016}
+}
+
+
+\section{Industrial Experience}
+\outerlist{
+\entrybig
+	{\textbf{Google Research}}{Seattle, US}
+	{Research Intern}{2022 Summer}
+\innerlist{
+	\entry{Mentors: Wennan Zhu and Peter Kairuoz}
+}
+\entrybig
+	{\textbf{Baidu Research}}{Beijing, CN}
+	{Research Intern}{2018 Winter}
+\innerlist{
+	\entry{Mentor: Haoyi Xiong}
+}
+}
+
+\section{Research Interests}
+Deep Learning Theory,
+Algorithms, Machine Learning, Optimization, Statistical Learning Theory
+
+
+
+
+\addcontentsline{toc}{section}{Publications}
+\nocite{*}
+\printbibliography[title=Preprints,keyword=arxiv]
+\printbibliography[title=Publications {\footnotesize (asterisk $^*$ indicates equal contributions)},keyword=conference]
+
+
+
+
+\section{Professional Services}
+\denseouterlist{
+\entry{\textbf{Conference Reviewer}}
+\innerlist{
+\entry{International Conference on Machine Learning (ICML), 2020 - 2023}
+\entry{Conference on Neural Information Processing Systems (NeurIPS), 2020 - 2023}
+\entry{International Conference on Learning Representations (ICLR), 2021 - 2024}
+\entry{International Conference on Artificial Intelligence and Statistics (AISTATS), 2021 - 2023}
+\entry{Conference on Uncertainty in Artificial Intelligence (UAI), 2023}
+}
+\entry{\textbf{Conference Program Committee Member}}
+\innerlist{
+\entry{AAAI Conference on Artificial Intelligence (AAAI), 2021 - 2023}
+}
+\entry{\textbf{Journal Reviewer}}
+\innerlist{
+	\entry{IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)}
+	\entry{Journal of Machine Learning Research (JMLR)}
+	\entry{Transactions on Machine Learning Research (TMLR)}
+	\entry{Applied Probability Journals}
+}
+}
+
+
+\section{Invited Talks}
+\denseouterlist{
+\entrymid[\textbullet]
+{\textbf{Statistics Seminar} at UC Davis}{Octorber 2023}
+{``New Insights about SGD: Stepsize, Risk Convergence, and Implicit Regularization''}
+\innerlist{
+	\entry{Host: Xiao Hui Tai}
+}
+\entrymid[\textbullet]
+{\textbf{MoDL Collaboration Meeting} at Toyota Technological Institute at Chicago}{May 2023}
+{``Implicit Bias of Gradient Descent for Logistic Regression at the Edge of Stability''}
+\innerlist{
+	\entry{Hosts: Sam Buchanan, Omar Montasser, and Gal Vardi}
+}
+\entrymid[\textbullet]
+{\textbf{Algorithms and ML Seminar} at Rice University}{January 2023}
+{``The Implicit Regularization of SGD in Least Square Problems and Beyond''}
+\innerlist{
+	\entry{Host: Anastasios Kyrillidis}
+}
+\entrymid[\textbullet]
+{\textbf{Deep Learning Theory Seminar} at Princeton University}{December 2022}
+{``A Fine-Grained Characterization for the Implicit Regularization of SGD in Least Square Problems''}
+\innerlist{
+	\entry{Host: Jason D.\ Lee}
+}
+\entrymid[\textbullet]
+{\textbf{Dynamical System Seminar} at Georgia Institute of Technology}{November 2022}
+{``A Fine-Grained Characterization for the Implicit Regularization of SGD in Least Square Problems''}
+\innerlist{
+	\entry{Host: Molei Tao}
+}
+\entrymid[\textbullet]
+{\textbf{Learning Theory Seminar} at Google Research}{August 2022}
+{``A Fine-Grained Characterization for the Implicit Regularization of SGD in Least Square Problems''}
+\innerlist{
+	\entry{Host: Mehryar Mohri}
+}
+\entrymid[\textbullet]
+{\textbf{Math Machine Learning Seminar} at MPI MiS and UCLA}{June 2022}
+{``A Fine-Grained Characterization for the Implicit Regularization of SGD in Least Square Problems''}
+\innerlist{
+	\entry{Host: Guido Montufar}
+}
+}
+
+\section{Teaching}
+\denseouterlist{
+\entrymid[\textbullet]
+{\textbf{Teaching Assistant} at Johns Hopkins University}{Spring 2023}{Machine Learning: Deep Learning}
+}
+
+
+
+\section{Awards}
+\denseouterlist{
+\entry{University of Chicago and UCSD Rising Stars in Data Science \hfill 2023}
+\entry{Johns Hopkins University MINDS Summer Data Science Fellowship \hfill 2021}
+\entry{ICML Best Reviewers (Top 10\%) \hfill 2021}
+}
+
+
+
+\end{document}
