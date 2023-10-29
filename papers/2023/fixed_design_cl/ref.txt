@@ -1,6 +1,0 @@
-@article{li2023fixed,
-    title   = {Fixed Design Analysis of Regularization-Based Continual Learning},
-    author  = {Li, Haoran and Wu, Jingfeng and Braverman, Vladimir},
-    journal = {Conference on Lifelong Learning Agents},
-    year    = {2023}
-}

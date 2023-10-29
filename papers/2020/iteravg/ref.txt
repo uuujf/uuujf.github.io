@@ -1,6 +1,0 @@
-@article{wu2020obtaining,
-  title={Obtaining Adjustable Regularization for Free via Iterate Averaging},
-  author={Wu, Jingfeng and Braverman, Vladimir and Yang, Lin F},
-  journal={The 37th International Conference on Machine Learning},
-  year={2020}
-}

@@ -1,6 +1,0 @@
-@article{wu2022gap,
-  title={Gap-Dependent Unsupervised Exploration for Reinforcement Learning},
-  author={Wu, Jingfeng and Braverman, Vladimir and Yang, Lin F},
-  journal={The 25th International Conference on Artificial Intelligence and Statistics},
-  year={2022}
-}

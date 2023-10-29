@@ -1,6 +1,0 @@
-@article{li2021lifelong,
-  title={Lifelong Learning with Sketched Structural Regularization},
-  author={Li, Haoran and Krishnan, Aditya and Wu, Jingfeng and Kolouri, Soheil and Pilly, Praveen K and Braverman, Vladimir},
-  journal={The 13th Asian Conference on Machine Learning},
-  year={2021}
-}

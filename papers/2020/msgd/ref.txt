@@ -1,6 +1,0 @@
-@article{wu2019noisy,
-  title={On the Noisy Gradient Descent that Generalizes as SGD},
-  author={Wu, Jingfeng and Hu, Wenqing and Xiong, Haoyi and Huan, Jun and Braverman, Vladimir and Zhu, Zhanxing},
-  journal={The 37th International Conference on Machine Learning},
-  year={2020}
-}

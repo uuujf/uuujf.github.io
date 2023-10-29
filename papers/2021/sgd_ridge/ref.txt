@@ -1,6 +1,0 @@
-@article{zou2021benefits,
-  title={The Benefits of Implicit Regularization from SGD in Least Squares Problems},
-  author={Zou, Difan and Wu, Jingfeng and Braverman, Vladimir and Gu, Quanquan and Foster, Dean P and Kakade, Sham M},
-  journal={The 35th Conference on Neural Information Processing Systems},
-  year={2021}
-}

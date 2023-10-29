@@ -1,6 +1,0 @@
-@article{wu2023private,
-      title={Private Federated Frequency Estimation: Adapting to the Hardness of the Instance}, 
-      author={Jingfeng Wu and Wennan Zhu and Peter Kairouz and Vladimir Braverman},
-      journal={The 36th Conference on Neural Information Processing Systems},
-      year={2023}
-}

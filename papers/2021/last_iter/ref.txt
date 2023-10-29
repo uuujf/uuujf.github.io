@@ -1,6 +1,0 @@
-@article{wu2022iterate,
-  title={Last Iterate Risk Bounds of SGD with Decaying Stepsize for Overparameterized Linear Regression},
-  author={Wu, Jingfeng and Zou, Difan and Braverman, Vladimir and Gu, Quanquan and Kakade, Sham M},
-  journal={The 39th International Conference on Machine Learning},
-  year={2022}
-}

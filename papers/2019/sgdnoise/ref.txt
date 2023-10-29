@@ -1,6 +1,0 @@
-@article{zhu2018anisotropic,
-  title={The Anisotropic Noise in Stochastic Gradient Descent: Its Behavior of Escaping from Sharp Minima and Regularization Effects},
-  author={Zhu, Zhanxing and Wu, Jingfeng and Yu, Bing and Wu, Lei and Ma, Jinwen},
-  journal={The 36th International Conference on Machine Learning },
-  year={2019}
-}
