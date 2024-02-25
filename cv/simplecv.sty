@@ -100,12 +100,9 @@
 
 % List items
 \newcommand{\entry}[1]{\item\small{#1}}
-\newcommand{\entryextra}[1]{\textcolor{color-detail}{\entry{#1}}}
-
 \newcommand{\entrysmall}[2]{\item \small{#1} \hfill \small{#2}}
 
 \newcommand{\entrytalk}[4]{\item {\small\textbf{#1}}, {\small \emph{#2}}, hosted by \small{#3} \hfill \small{#4}}
-
 
 \newcommand{\entrybig}[5][]{\item[#1]
     \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
@@ -133,6 +130,10 @@
   %
   \ifitemannotation{jointfirst}
   {\textsuperscript{*}}
+  {}
+  %
+  \ifitemannotation{alphabeta}
+  {\textsuperscript{\textdagger}}
   {}
 }
 
