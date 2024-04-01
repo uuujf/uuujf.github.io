@@ -1,0 +1,147 @@
+body {
+  min-height: 100vh;
+  max-width: 800px;
+  border: 0px;
+  padding: 0px;
+  margin: auto;
+  line-height: 1.5;
+  font-size: 16px;
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+a {
+  color: #3B7EA1;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #C4820E;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    font-weight: 350;
+    color: #E1D9D1;
+    background: #121212;
+  }
+
+  a {
+    color: #C4820E;
+  }
+
+  a:focus,
+  a:hover {
+    color: #3B7EA1;
+  }
+
+}
+
+div#bio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+
+div.biotext {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 60%;
+  padding: 10px;
+}
+
+img.bioimage {
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: cover;
+  border-radius: 50%;
+  max-width: 35%;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+div.section {
+  padding: 10px 20px 10px 20px;
+}
+
+div.content {
+  padding: 0px;
+}
+
+h1 {
+  text-align: center;
+  font-weight: normal;
+  font-size: min(5vw, 30px);
+}
+
+/* h2 {
+  font-weight: normal;
+}
+
+h3 {
+  font-weight: normal;
+} */
+
+span.paper {
+  font-weight: bold;
+}
+
+span.author {
+  font-weight: normal;
+}
+
+span.me {
+  font-weight: 600;
+  /* font-style: italic; */
+  /* text-decoration: underline; */
+}
+
+span.venue {
+  font-weight: normal;
+}
+
+span.seminar {
+  font-weight: normal;
+  font-style: italic;
+}
+
+span.location {
+  font-weight: 600;
+}
+
+span.people {
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 600px) {
+  div#bio {
+    display: block;
+  }
+
+  div.biotext {
+    display: block;
+    max-width: 100%;
+  }
+
+  img.bioimage {
+    display: block;
+    border-radius: 20%;
+    max-width: 40%;
+  }
+
+  body {
+    max-width: 100%;
+    font-size: 14px;
+  }
+}
