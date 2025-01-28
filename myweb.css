@@ -86,11 +86,11 @@ h1 {
 
 /* h2 {
   font-weight: normal;
-}
-
-h3 {
-  font-weight: normal;
 } */
+
+h3.foldable {
+  display: inline;
+}
 
 span.paper {
   font-weight: bold;
