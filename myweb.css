@@ -124,10 +124,6 @@ span.people {
   white-space: nowrap;
 }
 
-summary {
-  padding: 20px 10px 0px 10px;
-}
-
 @media screen and (max-width: 600px) {
   div#bio {
     display: block;
