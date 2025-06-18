@@ -128,10 +128,8 @@
   \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
   {\mkbibbold{#1}}{#1}%
   %
-  \ifitemannotation{jointfirst}
+  \ifitemannotation{equal}
   {\textsuperscript{*}}{}%
-  \ifitemannotation{alphabeta}
-  {\textsuperscript{\textdagger}}{}%
 }
 
 %% 
