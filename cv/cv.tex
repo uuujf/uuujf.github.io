@@ -1,0 +1,187 @@
+\documentclass[letterpaper,11pt]{article}
+\usepackage[cm]{fullpage}% Margins
+\usepackage{titlesec}% Title formatting
+\usepackage{mymath}
+\hypersetup{hidelinks}
+\ExecuteBibliographyOptions{sorting=none}
+\addbibresource{jwu.bib}% biblatex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Styling
+\pagestyle{empty}
+\raggedbottom
+\raggedright
+% Section titles
+\titleformat{\section}{
+    \scshape\raggedright\Large
+    }{}{0em}{}[\titlerule\vspace{-\smallskipamount}]
+% Lists
+\newcommand{\outerlist}[1]{
+    \begin{itemize}[leftmargin=*] #1 \end{itemize}}
+\newcommand{\innerlist}[1]{
+    \begin{itemize}[leftmargin=*,topsep=0pt] #1 \end{itemize}}
+% List items
+\newcommand{\entry}[1]{\item[] #1}
+\newcommand{\entrysmall}[2]{\item[] {#1} \hfill {#2}}
+\newcommand{\entrytalk}[4]{\item[] \textbf{#1}, \emph{#2} (#3) \hfill #4}
+\newcommand{\entrybig}[5][]{\item[#1]
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    #2 & #3 \\ #4 &  #5 \\ \end{tabular*}}
+\newcommand{\entryBig}[7][]{\item[#1]
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textbf{\large #2} & {\large #3} \\ #4 &  #5 \\  #6 & #7 \\ \end{tabular*}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Heading
+\begin{minipage}[t]{0.60\textwidth}
+\vspace*{\fill}
+\Huge Jingfeng Wu
+\end{minipage}
+\begin{minipage}[t]{0.35\textwidth}
+\begin{flushright}
+ Website: \href{https://uuujf.github.io}{\texttt{uuujf.github.io}} \\ 
+Email: \href{mailto:uuujf@berkeley.edu}{\tt uuujf@berkeley.edu}
+\end{flushright}
+\end{minipage}
+
+
+\section{Academic Experience}
+\outerlist{
+\entryBig
+	{University of California, Berkeley}{Berkeley, CA, USA}
+	{{Postdoctoral Fellow, \emph{Simons Institute for the Theory of Computing}}}{2023 - Present}
+	{Advisors: Peter Bartlett and Bin Yu}{}
+\entryBig
+{Johns Hopkins University}{Baltimore, MD, USA}
+{Ph.D.\ in \emph{Computer Science}}{2019 - 2023}
+{Advisor: Vladimir Braverman}{}
+\entryBig
+{Peking University}{Beijing, China}
+{M.S.\ in  \emph{Applied Mathematics}}{2016 - 2019}
+{B.S.\ in \emph{Mathematics \& Applied Mathematics}}{2012 - 2016}
+}
+
+\section{Industrial Experience}
+\outerlist{
+\entryBig
+	{Google Research}{Seattle, WA, USA}
+	{Research Intern}{Summer 2022}
+	{Mentors: Wennan Zhu and Peter Kairouz}{}
+\entryBig
+	{Baidu Research}{Beijing, China}
+	{Research Intern}{Winter 2018}
+	{Mentor: Haoyi Xiong}{}
+}
+
+\section{Research Interests}
+\outerlist{
+\entry{Deep Learning Theory, Optimization, Statistical Learning, Algorithms}
+}
+
+\addcontentsline{toc}{section}{Publications}
+\nocite{*}
+\printbibliography[title=Preprint \textnormal{\footnotesize (* indicates equal contribution or alphabetical order)},type=misc]
+\printbibliography[title=Conference Papers \textnormal{\footnotesize (* indicates equal contribution or alphabetical order)},type=inproceedings]
+\printbibliography[title=Journal Papers \textnormal{\footnotesize (* indicates equal contribution or alphabetical order)},type=article]
+
+
+
+\section{Recent Invited Talks}
+\outerlist{
+\item[] \textsc{\large``A Statistical View on Implicit Regularization: GD Dominates Ridge''}
+\innerlist{
+\entrytalk{Columbia}{Machine Learning \& AI Seminar}{host: Daniel Hsu}{October 2025}
+\entrytalk{NYU}{Math \& Data Seminar}{host: Matus Telgarsky}{October 2025}
+\entrytalk{Yale}{Statistics \& Data Science Seminar}{hosts: Theodor Misiakiewicz and Omar Montasser}{September 2025}
+}
+
+\item[] \textsc{\large ``Reimagining Gradient Descent: Large Stepsize, Oscillation, and Acceleration''}
+\innerlist{
+\entrytalk{Harvard}{Talk at Kempner Institute}{host: Sham Kakade}{October 2025}
+\entrytalk{MIT}{Talk at Laboratory for Information and Decision Systems}{host: Pablo Parrilo}{September 2025}
+\entrytalk{JHU}{CS Theory Seminar}{host: Vladimir Braverman}{September 2025}
+\entrytalk{UPenn}{Group Meeting}{host: Jason Altschuler}{September 2025}
+\entrytalk{MPI \& UCLA}{Math Machine Learning Seminar}{host: Guido Montufar}{June 2025}
+\entrytalk{SIAM DS25}{Dynamical Systems for Machine Learning}{host: Molei Tao}{May 2025}
+\entrytalk{UCLA}{Level Set Meeting}{hosts: Shu Liu and Stanley Osher}{January 2025}
+\entrytalk{Simons Foundation}{MoDL Annual Meeting}{hosts: Peter Bartlett and Rene Vidal}{September 2024}
+\entrytalk{UC San Diego}{MoDL Collaboration Meeting}{host: Mikhail Belkin et al.}{May 2024}
+\entrytalk{UCLA}{Computer Science Seminar}{host: Quanquan Gu}{March 2024}
+\entrytalk{UC Berkeley}{Biostatistics Seminar}{host: Lexin Li}{February 2024}
+}
+
+\item[] \textsc{\large ``A Statistical View on Implicit Regularization: GD for Logistic Regression''}
+\innerlist{
+\entrytalk{ICTP}{6th Youth in High-Dimensions Conference}{hosts: Marco Mondelli et al.}{July 2025}
+\entrytalk{UC Berkeley}{Deep Learning Theory Workshop}{hosts: Peter Bartlett et al.}{February 2025}
+}
+
+
+}
+
+
+\section{Professional Services}
+\outerlist{
+\item[] \textbf{\large Organizer}
+\innerlist{
+	\entrysmall{Deep Learning Theory Workshop, Simons Institute, UC Berkeley}{February 2025}
+}
+
+\item[] \textbf{\large Conference Reviewer}
+\innerlist{
+	\entrysmall{\emph{Conference on Learning Theory} (COLT)}{2026}
+	\entrysmall{\emph{International Conference on Machine Learning} (ICML)}{2020 - 2026}
+	\entrysmall{\emph{Conference on Neural Information Processing Systems} (NeurIPS)}{2020 - 2025}
+	\entrysmall{\emph{International Conference on Learning Representations} (ICLR)}{2021 - 2026}
+        \entrysmall{\emph{ACM-SIAM Symposium on Discrete Algorithms} (SODA), subreviewer}{2026}
+	\entrysmall{\emph{International Conference on Artificial Intelligence and Statistics} (AISTATS)}{2021 - 2023}
+	\entrysmall{\emph{Conference on Uncertainty in Artificial Intelligence} (UAI)}{2023}
+	\entrysmall{\emph{AAAI Conference on Artificial Intelligence} (AAAI), PC member reviewer}{2021 - 2023}
+}
+\item[] \textbf{\large Journal Reviewer}
+\innerlist{
+	\entry{\emph{Journal of Machine Learning Research} (JMLR)}
+	\entry{\emph{IEEE Transactions on Pattern Analysis and Machine Intelligence} (TPAMI)}
+	\entry{\emph{IEEE Transactions on Information Theory}}
+    \entry{\emph{Information and Inference}}
+	\entry{\emph{Transactions on Machine Learning Research} (TMLR)}
+	\entry{\emph{SIAM Journal on Mathematics of Data Science} (SIMODS)}
+	\entry{\emph{Advances in Applied Probability}}
+	\entry{\emph{Journal of Artificial Intelligence Research} (JAIR)}
+}
+}
+
+\section{Teaching}
+\outerlist{
+\entrybig{{\bf NeurIPS 2025 Tutorial}, Leading Speaker}{December 2025}{Tutorial: ``{Theoretical Insights on Training Instability in Deep Learning}''}{}
+\entrybig{{\bf Johns Hopkins University}, Teaching Assistant}{Spring 2023}{Course: ``{Machine Learning: Deep Learning}''}{}
+}
+
+
+\section{Honors}
+\outerlist{
+\entrybig{{\bf Rising Stars in Data Science}}{2023}{University of Chicago \& UC San Diego}{}
+\entrybig{{\bf MINDS Data Science Fellowship}}{Summer 2021}{Johns Hopkins University}{}
+\entrybig{{\bf Best Reviewers (Top 10\%)}}{2021}{ICML 2021}{}
+}
+
+\section{References}
+\innerlist{
+\entrysmall{\bf Peter L. Bartlett ({\tt peter@berkeley.edu})}{University of California, Berkeley}
+% {{\tt peter@berkeley.edu}}{}
+\entrysmall{\bf Vladimir Braverman ({\tt vova@cs.jhu.edu})}{Johns Hopkins University}
+% {{\tt vova@cs.jhu.edu}}{}
+\entrysmall{\bf Jason D. Lee ({\tt jasondlee@berkeley.edu})}{University of California, Berkeley}
+% {{\tt jasondlee@berkeley.edu}}{}
+\entrysmall{\bf Sham M. Kakade ({\tt sham@seas.harvard.edu})}{Harvard University}
+% {{\tt sham@seas.harvard.edu}}{}
+\entrysmall{\bf Matus Telgarsky ({\tt mjt10041@nyu.edu})}{New York University}
+% {{\tt mjt10041@nyu.edu}}{}
+\entrysmall{\bf Bin Yu ({\tt binyu@berkeley.edu})}{University of California, Berkeley}
+% {{\tt binyu@berkeley.edu}}{}
+}
+
+
+\end{document}

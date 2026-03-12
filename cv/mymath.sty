@@ -1,0 +1,340 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mymath}[2025/08/20 My Math LaTeX package]
+
+%% Required packages
+% Times font for both text and math
+\RequirePackage[T1]{fontenc}
+\RequirePackage{newtxtext}
+\RequirePackage[amsthm]{newtxmath} % compatible with amsthm
+% Math packages
+\RequirePackage{amsthm}
+\RequirePackage{bm}
+\RequirePackage{mathtools} % auto load amsmath
+
+% Recommended packages
+\usepackage[protrusion]{microtype}
+\usepackage{enumitem}
+\usepackage{xfrac}
+\usepackage{algorithm, algorithmic}
+\usepackage{graphicx, subfigure, wrapfig}
+\usepackage{booktabs, makecell, multirow}
+\usepackage[dvipsnames]{xcolor}
+
+%% hyperref
+\usepackage[colorlinks=true,
+linkcolor=NavyBlue,
+urlcolor=NavyBlue,
+anchorcolor=NavyBlue,
+citecolor=CadetBlue
+]{hyperref}
+
+\usepackage[backend=biber,bibstyle=numeric,giveninits=true,defernumbers=true,sorting=ydnt,maxbibnames=99]{biblatex}
+\renewcommand*{\bibfont}{\small}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make author name bold: https://tex.stackexchange.com/a/327046
+\newcommand*{\boldname}[3]{%
+  \def\lastname{#1}%
+  \def\firstname{#2}%
+  \def\firstinit{#3}}
+\boldname{}{}{}
+
+\renewcommand{\mkbibnamegiven}[1]{%
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  {\mkbibbold{#1}}{#1}%
+}
+
+\renewcommand{\mkbibnamefamily}[1]{%
+  \ifboolexpr{ ( test {\ifdefequal{\firstname}{\namepartgiven}} or test {\ifdefequal{\firstinit}{\namepartgiven}} ) and test {\ifdefequal{\lastname}{\namepartfamily}} }
+  {\mkbibbold{#1}}{#1}%
+  \ifitemannotation{equal}
+  {\textsuperscript{*}}{}%
+}
+
+\boldname{Wu}{Jingfeng}{J.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%% cleveref
+\usepackage{thmtools} %% fix issues with cleveref and amsthm; load after amsthm, before cleveref
+\usepackage[noabbrev,capitalize]{cleveref} %% cleveref
+\crefname{equation}{}{} %% refer to equations by (*) only
+\AddToHook{cmd/appendix/before}{%
+  \crefalias{section}{appendix}%%% cref appendix
+  \crefalias{subsection}{appendix}%%% cref appendix subsection
+}
+
+\newcommand\explain[1]{\text{\textcolor{gray}{#1}}}
+
+\allowdisplaybreaks % allow display breaks across pages
+
+%% Common math
+% Terminologies
+\newcommand{\algo}{\mathrm{alg}}
+\newcommand{\sgd}{\mathrm{sgd}}
+\newcommand{\gd}{\mathrm{gd}}
+\newcommand{\ridge}{\mathrm{ridge}}
+\newcommand{\risk}{\Rcal}
+\newcommand{\excessRisk}{\Ecal}%{\Delta}
+\newcommand{\bias}{ \mathrm{Bias} }
+\newcommand{\variance}{ \mathrm{Variance} }
+\newcommand{\effVar}{\mathrm{EffectiveVariance}}
+\newcommand{\effBias}{\mathrm{EffectiveBias}}
+
+%% Abbreviations
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\inv}{{-1}}
+% \newcommand{\st}{s.t.\,}
+\newcommand{\as}{\text{almost surely}}
+\newcommand{\sgn}{ \mathtt{sign} }
+\newcommand{\spn}{ \mathrm{span} }
+\newcommand{\hermiteP}{\mathrm{He}}
+\newcommand{\hermiteB}{\mathrm{h}}
+
+% Calculus
+\newcommand{\lap}{\Delta}
+\newcommand{\grad}{\nabla}
+\newcommand{\hess}{\nabla^2}
+\newcommand{\dif}{\mathrm{d}}
+
+% Algebra
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+% Indicator: \ind{x=1}
+\newcommand{\ind}[1]{\ensuremath{\mathbf{1}\left[#1\right]}}
+
+% Big O
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\bigO}{\mathcal{O}}
+\newcommand{\bigOT}{ \widetilde{ \mathcal{O} } }
+
+
+%%% stretch matrix
+%%% https://tex.stackexchange.com/questions/14071/how-can-i-increase-the-line-spacing-in-a-matrix
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+
+%%% ========= cleveref and theorems =========
+%% assumption
+\newtheorem{assumption}{Assumption}
+\crefname{assumption}{assumption}{assumptions} %% cref assumption
+
+\newlist{assumpenum}{enumerate}{1} % assumption 1a
+\setlist[assumpenum]{label=\Alph*., ref=\theassumption\Alph*, leftmargin=*}
+\crefalias{assumpenumi}{assumption}
+
+\newtheorem{taggedassumptionx}{Assumption} %% assumption 1'
+\newenvironment{taggedassumption}[1]
+{\renewcommand\thetaggedassumptionx{#1}\taggedassumptionx}
+{\endtaggedassumptionx}
+
+%% theorems
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}{Example}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+%% definitions and remarks
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem*{remark*}{Remark}
+%%% ========= cleveref =========
+
+%% Styled letters
+% Boldface font
+\newcommand{\zeroB}{\mathbf{0}}
+\newcommand{\oneB}{\mathbf{1}}
+
+\newcommand{\aB}{\mathbf{a}}
+\newcommand{\bB}{\mathbf{b}}
+\newcommand{\cB}{\mathbf{c}}
+\newcommand{\dB}{\mathbf{d}}
+\newcommand{\eB}{\mathbf{e}}
+\newcommand{\fB}{\mathbf{f}}
+\newcommand{\gB}{\mathbf{g}}
+\newcommand{\hB}{\mathbf{h}}
+\newcommand{\iB}{\mathbf{i}}
+\newcommand{\jB}{\mathbf{j}}
+\newcommand{\kB}{\mathbf{k}}
+\newcommand{\lB}{\mathbf{l}}
+\newcommand{\mB}{\mathbf{m}}
+\newcommand{\nB}{\mathbf{n}}
+\newcommand{\oB}{\mathbf{o}}
+\newcommand{\pB}{\mathbf{p}}
+\newcommand{\qB}{\mathbf{q}}
+\newcommand{\rB}{\mathbf{r}}
+\newcommand{\sB}{\mathbf{s}}
+\newcommand{\tB}{\mathbf{t}}
+\newcommand{\uB}{\mathbf{u}}
+\newcommand{\vB}{\mathbf{v}}
+\newcommand{\wB}{\mathbf{w}}
+\newcommand{\xB}{\mathbf{x}}
+\newcommand{\yB}{\mathbf{y}}
+\newcommand{\zB}{\mathbf{z}}
+
+\newcommand{\AB}{\mathbf{A}}
+\newcommand{\BB}{\mathbf{B}}
+\newcommand{\CB}{\mathbf{C}}
+\newcommand{\DB}{\mathbf{D}}
+\newcommand{\EB}{\mathbf{E}}
+\newcommand{\FB}{\mathbf{F}}
+\newcommand{\GB}{\mathbf{G}}
+\newcommand{\HB}{\mathbf{H}}
+\newcommand{\IB}{\mathbf{I}}
+\newcommand{\JB}{\mathbf{J}}
+\newcommand{\KB}{\mathbf{K}}
+\newcommand{\LB}{\mathbf{L}}
+\newcommand{\MB}{\mathbf{M}}
+\newcommand{\NB}{\mathbf{N}}
+\newcommand{\OB}{\mathbf{O}}
+\newcommand{\PB}{\mathbf{P}}
+\newcommand{\QB}{\mathbf{Q}}
+\newcommand{\RB}{\mathbf{R}}
+\newcommand{\SB}{\mathbf{S}}
+\newcommand{\TB}{\mathbf{T}}
+\newcommand{\UB}{\mathbf{U}}
+\newcommand{\VB}{\mathbf{V}}
+\newcommand{\WB}{\mathbf{W}}
+\newcommand{\XB}{\mathbf{X}}
+\newcommand{\YB}{\mathbf{Y}}
+\newcommand{\ZB}{\mathbf{Z}}
+
+\newcommand{\alphaB}{\bm{\alpha}}
+\newcommand{\betaB}{\bm{\beta}}
+\newcommand{\gammaB}{\bm{\gamma}}
+\newcommand{\deltaB}{\bm{\delta}}
+\newcommand{\epsilonB}{\bm{\epsilon}}
+\newcommand{\varepsilonB}{\bm{\varepsilon}}
+\newcommand{\zetaB}{\bm{\zeta}}
+\newcommand{\etaB}{\bm{\eta}}
+\newcommand{\thetaB}{\bm{\theta}}
+\newcommand{\varthetaB}{\bm{\vartheta}}
+\newcommand{\iotaB}{\bm{\iota}}
+\newcommand{\kappaB}{\bm{\kappa}}
+\newcommand{\lambdaB}{\bm{\lambda}}
+\newcommand{\muB}{\bm{\mu}}
+\newcommand{\nuB}{\bm{\nu}}
+\newcommand{\xiB}{\bm{\xi}}
+\newcommand{\piB}{\bm{\pi}}
+\newcommand{\varpiB}{\bm{\varpi}}
+\newcommand{\rhoB}{\bm{\rho}}
+\newcommand{\varrhoB}{\bm{\varrho}}
+\newcommand{\sigmaB}{\bm{\sigma}}
+\newcommand{\varsigmaB}{\bm{\varsigma}}
+\newcommand{\tauB}{\bm{\tau}}
+\newcommand{\upsilonB}{\bm{\upsilon}}
+\newcommand{\phiB}{\bm{\phi}}
+\newcommand{\varphiB}{\bm{\varphi}}
+\newcommand{\chiB}{\bm{\chi}}
+\newcommand{\psiB}{\bm{\psi}}
+\newcommand{\omegaB}{\bm{\omega}}
+
+\newcommand{\GammaB}{\bm{\Gamma}}
+\newcommand{\DeltaB}{\bm{\Delta}}
+\newcommand{\ThetaB}{\bm{\Theta}}
+\newcommand{\LambdaB}{\bm{\Lambda}}
+\newcommand{\XiB}{\bm{\Xi}}
+\newcommand{\PiB}{\bm{\Pi}}
+\newcommand{\SigmaB}{\bm{\Sigma}}
+\newcommand{\UpsilonB}{\bm{\Upsilon}}
+\newcommand{\PhiB}{\bm{\Phi}}
+\newcommand{\PsiB}{\bm{\Psi}}
+\newcommand{\OmegaB}{\bm{\Omega}}
+
+% Blackboard bold font
+\newcommand{\Abb}{\mathbb{A}}
+% \newcommand{\Bbb}{\mathbb{B}}
+\newcommand{\Cbb}{\mathbb{C}}
+\newcommand{\Dbb}{\mathbb{D}}
+\newcommand{\Ebb}{\mathbb{E}}
+\newcommand{\Fbb}{\mathbb{F}}
+\newcommand{\Gbb}{\mathbb{G}}
+\newcommand{\Hbb}{\mathbb{H}}
+\newcommand{\Ibb}{\mathbb{I}}
+\newcommand{\Jbb}{\mathbb{J}}
+\newcommand{\Kbb}{\mathbb{K}}
+\newcommand{\Lbb}{\mathbb{L}}
+\newcommand{\Mbb}{\mathbb{M}}
+\newcommand{\Nbb}{\mathbb{N}}
+\newcommand{\Obb}{\mathbb{O}}
+\newcommand{\Pbb}{\mathbb{P}}
+\newcommand{\Qbb}{\mathbb{Q}}
+\newcommand{\Rbb}{\mathbb{R}}
+\newcommand{\Sbb}{\mathbb{S}}
+\newcommand{\Tbb}{\mathbb{T}}
+\newcommand{\Ubb}{\mathbb{U}}
+\newcommand{\Vbb}{\mathbb{V}}
+\newcommand{\Wbb}{\mathbb{W}}
+\newcommand{\Xbb}{\mathbb{X}}
+\newcommand{\Ybb}{\mathbb{Y}}
+\newcommand{\Zbb}{\mathbb{Z}}
+
+% Calligraphic font
+\newcommand{\Acal}{\mathcal{A}}
+\newcommand{\Bcal}{\mathcal{B}}
+\newcommand{\Ccal}{\mathcal{C}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\Ecal}{\mathcal{E}}
+\newcommand{\Fcal}{\mathcal{F}}
+\newcommand{\Gcal}{\mathcal{G}}
+\newcommand{\Hcal}{\mathcal{H}}
+\newcommand{\Ical}{\mathcal{I}}
+\newcommand{\Jcal}{\mathcal{J}}
+\newcommand{\Kcal}{\mathcal{K}}
+\newcommand{\Lcal}{\mathcal{L}}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Ncal}{\mathcal{N}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\Pcal}{\mathcal{P}}
+\newcommand{\Qcal}{\mathcal{Q}}
+\newcommand{\Rcal}{\mathcal{R}}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\Tcal}{\mathcal{T}}
+\newcommand{\Ucal}{\mathcal{U}}
+\newcommand{\Vcal}{\mathcal{V}}
+\newcommand{\Wcal}{\mathcal{W}}
+\newcommand{\Xcal}{\mathcal{X}}
+\newcommand{\Ycal}{\mathcal{Y}}
+\newcommand{\Zcal}{\mathcal{Z}}
+
+\newcommand{\Ascr}{\mathscr{A}}
+\newcommand{\Bscr}{\mathscr{B}}
+\newcommand{\Cscr}{\mathscr{C}}
+\newcommand{\Dscr}{\mathscr{D}}
+\newcommand{\Escr}{\mathscr{E}}
+\newcommand{\Fscr}{\mathscr{F}}
+\newcommand{\Gscr}{\mathscr{G}}
+\newcommand{\Hscr}{\mathscr{H}}
+\newcommand{\Iscr}{\mathscr{I}}
+\newcommand{\Jscr}{\mathscr{J}}
+\newcommand{\Kscr}{\mathscr{K}}
+\newcommand{\Lscr}{\mathscr{L}}
+\newcommand{\Mscr}{\mathscr{M}}
+\newcommand{\Nscr}{\mathscr{N}}
+\newcommand{\Oscr}{\mathscr{O}}
+\newcommand{\Pscr}{\mathscr{P}}
+\newcommand{\Qscr}{\mathscr{Q}}
+\newcommand{\Rscr}{\mathscr{R}}
+\newcommand{\Sscr}{\mathscr{S}}
+\newcommand{\Tscr}{\mathscr{T}}
+\newcommand{\Uscr}{\mathscr{U}}
+\newcommand{\Vscr}{\mathscr{V}}
+\newcommand{\Wscr}{\mathscr{W}}
+\newcommand{\Xscr}{\mathscr{X}}
+\newcommand{\Yscr}{\mathscr{Y}}
+\newcommand{\Zscr}{\mathscr{Z}}
