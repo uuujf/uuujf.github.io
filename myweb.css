@@ -77,10 +77,16 @@ div.content {
   padding: 0px;
 }
 
-h1 {
+#bio h1 {
   text-align: center;
   font-weight: normal;
   font-size: min(5vw, 30px);
+}
+
+h1.page-title {
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
 }
 
 /* h2 {
