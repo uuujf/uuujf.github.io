@@ -120,6 +120,32 @@ span.location {
   font-weight: 600;
 }
 
+#people .family-gallery {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+#people .family-gallery figure {
+  box-sizing: border-box;
+  flex: 1;
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
+
+#people .family-gallery img {
+  display: block;
+  object-fit: cover;
+  border-radius: 50%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
 @media screen and (max-width: 600px) {
   div#bio {
     display: block;
@@ -139,6 +165,19 @@ span.location {
   body {
     max-width: 100%;
     font-size: 14px;
+  }
+
+  #people .family-gallery {
+    flex-direction: column;
+  }
+
+  #people .family-gallery figure {
+    width: 100%;
+  }
+
+  #people .family-gallery img {
+    border-radius: 20%;
+    max-width: 40%;
   }
 }
 
