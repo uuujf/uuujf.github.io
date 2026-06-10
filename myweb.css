@@ -120,11 +120,6 @@ span.location {
   font-weight: 600;
 }
 
-span.people {
-  font-weight: normal;
-  white-space: nowrap;
-}
-
 @media screen and (max-width: 600px) {
   div#bio {
     display: block;
