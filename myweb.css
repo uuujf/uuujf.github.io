@@ -101,12 +101,6 @@ span.author {
   font-weight: normal;
 }
 
-span.me {
-  font-weight: 600;
-  /* font-style: italic; */
-  /* text-decoration: underline; */
-}
-
 span.venue {
   font-weight: normal;
 }
