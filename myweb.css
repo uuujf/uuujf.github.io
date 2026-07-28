@@ -1,8 +1,7 @@
 body {
   min-height: 100vh;
   max-width: 800px;
-  border: 0px;
-  padding: 0px;
+  padding: 0;
   margin: auto;
   line-height: 1.5;
   font-size: 16px;
@@ -44,7 +43,7 @@ a:hover {
 }
 
 section {
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px;
 }
 
 div#bio {
@@ -54,15 +53,11 @@ div#bio {
 }
 
 div#biotext {
-  display: inline-block;
-  vertical-align: middle;
   max-width: 60%;
   padding: 10px;
 }
 
 img#bioimage {
-  display: inline-block;
-  vertical-align: middle;
   object-fit: cover;
   border-radius: 50%;
   max-width: 40%;
@@ -74,7 +69,7 @@ img#bioimage {
 }
 
 div.content {
-  padding: 0px;
+  padding: 0;
 }
 
 #bio h1 {
@@ -88,10 +83,6 @@ h1.page-title {
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
 }
-
-/* h2 {
-  font-weight: normal;
-} */
 
 span.paper {
   font-weight: bold;
@@ -112,6 +103,10 @@ span.seminar {
 
 span.location {
   font-weight: 600;
+}
+
+.legacy-anchor {
+  display: block;
 }
 
 #people .family-gallery {
@@ -175,11 +170,9 @@ span.location {
   }
 }
 
-
-
 figure {
-  max-width: min(100%,400px);
-  display: block; 
+  max-width: min(100%, 400px);
+  display: block;
   margin: auto;
   padding: 10px;
 }
@@ -193,5 +186,5 @@ figure img {
 }
 
 figure figcaption {
-    text-align: center;
+  text-align: center;
 }
