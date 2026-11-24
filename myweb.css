@@ -60,7 +60,7 @@ div#biotext {
 img#bioimage {
   object-fit: cover;
   border-radius: 50%;
-  max-width: 40%;
+  max-width: 30%;
   width: auto;
   height: auto;
   margin-left: auto;
